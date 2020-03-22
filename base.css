@@ -1,0 +1,41 @@
+body,form,h1,h2,h3,h4,h5,ol,p,ul {
+	margin: 0
+}
+
+ol,ul {
+	padding: 0
+}
+
+html {
+	font: 14px BlinkMacSystemFont,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",sans-serif;
+	color: #222
+}
+
+button,input,option,select,textarea {
+	font: inherit
+}
+
+h1,h2,h3,h4 {
+	font-weight: 600
+}
+
+button:focus,input:focus,textarea:focus {
+	outline: 0
+}
+
+::selection {
+	background: rgba(0,149,255,.1)
+}
+
+ul {
+	list-style-type: none
+}
+
+a {
+	text-decoration: none;
+	color: #004cff
+}
+
+img {
+	border: 0 none
+}

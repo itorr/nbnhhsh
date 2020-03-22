@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>能不能好好说话</title>
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="nbnhhsh.css">
+	<link rel="stylesheet" href="document.css">
+</head>
+<body>
+	<header>
+		<h1>能不能好好说话</h1>
+		<p>😩</p>
+		<p>拼音首字母缩写释义工具</p>
+	</header>
+	<div id="el">
+		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh()"></textarea>
+
+		<div class="func-nbnhhsh-box" v-if="show">
+			<div class="nbnhhsh-loading" v-if="loading">
+				加载中…
+			</div>
+			<div class="nbnhhsh-tag-list" v-else-if="tags.length">
+				<div class="nbnhhsh-tag-item" v-for="tag in tags">
+					<h4>{{tag.name}}</h4>
+					<div class="nbnhhsh-tran-list" v-if="tag.trans">
+						<span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
+					</div>
+					<div v-else-if="tag.inputting && tag.inputting.length !==0">
+						<div class="nbnhhsh-inputting-list">
+							<h5>有可能是</h5>
+							<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
+						</div>
+					</div>
+					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
+						尚未录入，我来提交对应文字
+					</div>
+					<a @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+				</div>
+			</div>
+			<div class="nbnhhsh-loading" v-else>
+				没有匹配到拼音首字母缩写
+			</div>
+
+		</div>
+	</div>
+	<div class="content-box">
+		<p><a href="nbnhhsh.user.js">油猴脚本</a></p>
+	</div>
+
+	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script>
+
+		let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
+		let Nbnhhsh = {};
+
+		let guess = (text,onOver)=>{
+
+			if(Nbnhhsh[text]){
+				return onOver(Nbnhhsh[text]);
+			}
+			if(guess.x){
+				guess.x.abort();
+			}
+			app.loading = true;
+			guess.x = new XMLHttpRequest();
+			guess.x.open('POST',APIURL+'guess');
+			guess.x.setRequestHeader('content-type', 'application/json');
+			guess.x.withCredentials = true;
+			guess.x.onload = ()=>{
+				app.loading = false;
+				let data = JSON.parse(guess.x.responseText);
+
+				onOver(Nbnhhsh[text] = data);
+			};
+
+			guess.x.send(JSON.stringify({text}));
+		};
+		let _guess = (text,onOver)=>{
+			clearTimeout(_guess.t);
+			_guess.t=setTimeout(guess.bind(this,text,onOver),300);
+		};
+		let submitTran = (name)=>{
+
+			let text = prompt('输入缩写对应文字','');
+
+			if(!text || !text.trim || !text.trim()){
+				return;
+			}
+
+			let x = new XMLHttpRequest();
+			x.open('POST',APIURL+'translation/'+name);
+			x.setRequestHeader('content-type', 'application/json');
+			x.withCredentials = true;
+			x.onload = ()=>{
+				alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
+			};
+			x.send(JSON.stringify({text}));
+		};
+		app = new Vue({
+			el,
+			data: {
+				text:'',
+				tags:[],
+				loading:false,
+				show:false
+			},
+			methods: {
+				submitTran,
+				nbnhhsh(){
+					let text = this.text;
+					app.show = !!text;
+					if(text){
+
+						_guess(text,data=>{
+
+							if(data.error){
+								app.error = data.error;
+							}else{
+								app.error = null;
+								app.tags = data;
+							}
+						});
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

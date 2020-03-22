@@ -1,0 +1,35 @@
+body{
+	max-width: 800px;
+	margin:0 auto;
+}
+header{
+	text-align: center;
+	padding:60px 0;
+
+}
+header h1{
+	font-size:3em;
+
+}
+header 	p{
+	padding:.5em 0;
+	color:#999;
+}
+textarea{
+	display: block;
+	border:0;
+	width:calc( 100% - 28px );
+	max-width:calc( 100% - 28px );
+	min-width:calc( 100% - 28px );
+	min-height:200px;
+	padding:10px 14px;
+	box-shadow:0 0 0 2px #999;
+
+}
+.func-nbnhhsh-box{
+	padding:20px 0;
+}
+
+.content-box{
+	padding:20px 10px;
+}

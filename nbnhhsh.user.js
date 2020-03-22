@@ -5,7 +5,7 @@
 // @description  首字母缩写划词翻译工具
 // @author       itorr
 // @match        https://weibo.com/*
-// @match        https://www.weibo.com/*
+// @match        https://*.weibo.com/*
 // @grant        none
 // ==/UserScript==
 

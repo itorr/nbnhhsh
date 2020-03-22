@@ -130,7 +130,7 @@ el.innerHTML = `
 				<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
 					尚未录入，我来提交对应文字
 				</div>
-				<a @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+				<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
 			</div>
 		</div>
 	</div>

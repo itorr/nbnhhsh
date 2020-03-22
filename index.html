@@ -27,6 +27,9 @@
 					<div class="nbnhhsh-tran-list" v-if="tag.trans">
 						<span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
 					</div>
+					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
+						无对应文字
+					</div>
 					<div v-else-if="tag.inputting && tag.inputting.length !==0">
 						<div class="nbnhhsh-inputting-list">
 							<h5>有可能是</h5>

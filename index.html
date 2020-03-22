@@ -77,7 +77,7 @@
 		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
 	</div>
 
-	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="//cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
 	<script>
 		(()=>{
 			let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
@@ -154,6 +154,13 @@
 					}
 				}
 			});
+
+			let j = (src,el) =>{
+				el = document.createElement('script');
+				el.src = src;
+				document.body.appendChild(el);
+			};
+			j('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
 		})();
 	</script>
 	<script src="nbnhhsh.user.js"></script>

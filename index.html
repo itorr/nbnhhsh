@@ -2,14 +2,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>能不能好好说话</title>
+	<title>能不能好好说话？</title>
 	<link rel="stylesheet" href="base.css">
 	<link rel="stylesheet" href="nbnhhsh.css">
 	<link rel="stylesheet" href="document.css">
 </head>
 <body>
 	<header>
-		<h1>能不能好好说话</h1>
+		<h1>能不能好好说话？</h1>
 		<p>😩</p>
 		<p>拼音首字母缩写释义工具</p>
 	</header>
@@ -45,86 +45,108 @@
 		</div>
 	</div>
 	<div class="content-box">
-		<p><a href="nbnhhsh.user.js">油猴脚本</a></p>
+		<h2>例文</h2>
+		<blockquote>
+			<p>草这个tmd网络世界我真的太恨缩写了。</p>
+			<p>
+				随便点开一条微博，艺人名字要缩写，gzs工作室也要缩写，gc广场他妈的也是缩写，hgr老子猜了老半天，百度一下才知道是韩国人，拳头硬了。<br>
+				讲个话开头也缩写，srds虽然但是，yjgj有句港句，bbl求求了。（这个谁看得出来你妈的）<br>
+				夸人骂人也都缩写，yjjc一骑绝尘，wdcc弯道超车，yygq阴阳怪气，myss美颜盛世，rnb我也猜了半天，最后被告知是really牛b的意思，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈又硬了呢。<br>
+				最要命的还不是这些，我刚刚看到网友评价什么什么他jb的什么，我以为jb就是jb的意思吧，但联系上下文句子又读不通，想了一分钟，哇，原来jb是姜滨的缩写啊！<br>
+				jb＝姜滨，我离开了。</p>
+			<p>@你里哥哥</p>
+		</blockquote>
+
+		<h2>为什么做这东西？</h2>
+		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让常人勉强能理解这一门另类沟通方式、做了这一个划词翻译油猴脚本。</p>
+		<h2>油猴脚本</h2>
+		<p>安装好油猴脚本浏览器插件之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
+		<blockquote>
+			<p>脚本版本目前仅会在 <code>https://weibo.com/*</code> 页面下运行，划词时会提交所选文字以用于转义。</p>
+		</blockquote>
+		<h2>贡献词条</h2>
+		<p>在每一个词条右上角都有 <code>+</code> 图标的按钮，点击可以提交对应文字，审核后会整理录入。</p>
 	</div>
 
 	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
 	<script>
+		(()=>{
+			let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
+			let Nbnhhsh = {};
 
-		let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
-		let Nbnhhsh = {};
+			let guess = (text,onOver)=>{
 
-		let guess = (text,onOver)=>{
+				if(Nbnhhsh[text]){
+					return onOver(Nbnhhsh[text]);
+				}
+				if(guess.x){
+					guess.x.abort();
+				}
+				app.loading = true;
+				guess.x = new XMLHttpRequest();
+				guess.x.open('POST',APIURL+'guess');
+				guess.x.setRequestHeader('content-type', 'application/json');
+				guess.x.withCredentials = true;
+				guess.x.onload = ()=>{
+					app.loading = false;
+					let data = JSON.parse(guess.x.responseText);
 
-			if(Nbnhhsh[text]){
-				return onOver(Nbnhhsh[text]);
-			}
-			if(guess.x){
-				guess.x.abort();
-			}
-			app.loading = true;
-			guess.x = new XMLHttpRequest();
-			guess.x.open('POST',APIURL+'guess');
-			guess.x.setRequestHeader('content-type', 'application/json');
-			guess.x.withCredentials = true;
-			guess.x.onload = ()=>{
-				app.loading = false;
-				let data = JSON.parse(guess.x.responseText);
+					onOver(Nbnhhsh[text] = data);
+				};
 
-				onOver(Nbnhhsh[text] = data);
+				guess.x.send(JSON.stringify({text}));
 			};
-
-			guess.x.send(JSON.stringify({text}));
-		};
-		let _guess = (text,onOver)=>{
-			clearTimeout(_guess.t);
-			_guess.t=setTimeout(guess.bind(this,text,onOver),300);
-		};
-		let submitTran = (name)=>{
-
-			let text = prompt('输入缩写对应文字','');
-
-			if(!text || !text.trim || !text.trim()){
-				return;
-			}
-
-			let x = new XMLHttpRequest();
-			x.open('POST',APIURL+'translation/'+name);
-			x.setRequestHeader('content-type', 'application/json');
-			x.withCredentials = true;
-			x.onload = ()=>{
-				alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
+			let _guess = (text,onOver)=>{
+				clearTimeout(_guess.t);
+				_guess.t=setTimeout(guess.bind(this,text,onOver),300);
 			};
-			x.send(JSON.stringify({text}));
-		};
-		let app = new Vue({
-			el,
-			data: {
-				text:'',
-				tags:[],
-				loading:false,
-				show:false
-			},
-			methods: {
-				submitTran,
-				nbnhhsh(){
-					let text = this.text;
-					app.show = !!text;
-					if(text){
+			let submitTran = (name)=>{
 
-						_guess(text,data=>{
+				let text = prompt('输入缩写对应文字','');
 
-							if(data.error){
-								app.error = data.error;
-							}else{
-								app.error = null;
-								app.tags = data;
-							}
-						});
+				if(!text || !text.trim || !text.trim()){
+					return;
+				}
+
+				let x = new XMLHttpRequest();
+				x.open('POST',APIURL+'translation/'+name);
+				x.setRequestHeader('content-type', 'application/json');
+				x.withCredentials = true;
+				x.onload = ()=>{
+					alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
+				};
+				x.send(JSON.stringify({text}));
+			};
+			let app = new Vue({
+				el,
+				data: {
+					text:'',
+					tags:[],
+					loading:false,
+					show:false
+				},
+				methods: {
+					submitTran,
+					nbnhhsh(){
+						let text = this.text;
+						app.show = !!text;
+						if(text){
+
+							_guess(text,data=>{
+
+								if(data.error){
+									app.error = data.error;
+								}else{
+									app.error = null;
+									app.tags = data;
+								}
+							});
+						}
 					}
 				}
-			}
-		});
+			});
+		})();
 	</script>
+	<script src="nbnhhsh.user.js"></script>
 </body>
 </html>

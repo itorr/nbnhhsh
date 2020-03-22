@@ -23,7 +23,7 @@ textarea{
 	min-width:calc( 100% - 28px );
 	min-height:200px;
 	padding:10px 14px;
-	box-shadow:0 0 0 2px #999;
+	box-shadow:0 0 0 2px #999 inset;
 
 }
 .func-nbnhhsh-box{
@@ -31,5 +31,24 @@ textarea{
 }
 
 .content-box{
-	padding:20px 10px;
+	padding:20px 10px 400px;
+}
+.content-box h2{
+	padding:1.5em 0 .5em;
+}
+.content-box p{
+	padding:.4em 0;
+}
+.content-box code{
+	display: inline-block;
+	margin:0 0.3em;
+	background:rgba(0,0,0,.1);
+	padding:.1em .3em;
+	border-radius:.2em;
+}
+.content-box blockquote{
+	margin:1em 0;
+	padding: .6em 1.2em;
+	color:#666;
+	background:rgba(0,0,0,.05);
 }

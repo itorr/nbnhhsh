@@ -77,6 +77,9 @@ let nbnhhsh = ()=>{
 			}else{
 				app.error = null;
 				app.tags = data;
+				if(!data.length){
+					app.show = false;
+				}
 			}
 		});
 
@@ -173,7 +176,7 @@ styleEl.innerHTML=`
 	width: 210px;
 	background:#FFF;
 	box-shadow: 0 3px 30px -4px rgba(0,0,0,.3);
-	margin: 10px 0 0 0;
+	margin: 10px 0 100px 0;
 	font:400 14px/1.4 sans-serif;
 }
 .nbnhhsh-box::before{
@@ -217,7 +220,7 @@ styleEl.innerHTML=`
 .nbnhhsh-inputting-list h5{
 	font-size:12px;
 	line-height:24px;
-	color:#666;
+	color:#999;
 }
 .nbnhhsh-inputting-item{
 	margin-right:4px;

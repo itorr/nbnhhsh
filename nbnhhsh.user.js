@@ -7,7 +7,6 @@
 // @match        https://weibo.com/*
 // @match        https://www.weibo.com/*
 // @grant        none
-// @run-at       document-start
 // ==/UserScript==
 
 (function() {

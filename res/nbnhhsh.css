@@ -1,64 +1,64 @@
-.nbnhhsh-box{
-	position: absolute;
+.nbnhhsh-box {
+	position:absolute;
 	z-index:99999999999;
-	width: 210px;
+	width:210px;
 	background:#FFF;
 	box-shadow: 0 3px 30px -4px rgba(0,0,0,.3);
 	margin: 10px 0 100px 0;
 	font:400 14px/1.4 sans-serif;
 }
-.nbnhhsh-box::before{
-	content: '';
-	position: absolute;
+.nbnhhsh-box::before {
+	content:'';
+	position:absolute;
 	top:-7px;
 	left:8px;
-	width: 0;
-	height: 0;
+	width:0;
+	height:0;
 	border:7px solid transparent;
 
 	border-top:1px;
 	border-bottom-color:#FFF;
 }
-.nbnhhsh-tag-list{
+.nbnhhsh-tag-list {
 	/*padding:4px 0;*/
 }
-.nbnhhsh-tag-item{
-	padding:4px 14px;
+.nbnhhsh-tag-item {
+	padding: 4px 14px;
 	position: relative;
 }
-.nbnhhsh-tag-item:nth-child(even){
+.nbnhhsh-tag-item:nth-child(even) {
 	background: rgba(0, 99, 255, 0.06);
 }
-.nbnhhsh-tag-item h4{
+.nbnhhsh-tag-item h4 {
 	font-weight:bold;
 	font-size:18px;
 }
-.nbnhhsh-tran-list{
+.nbnhhsh-tran-list {
 	color:#222;
 	padding:4px 0;
 }
-.nbnhhsh-tran-item{
+.nbnhhsh-tran-item {
 	margin-right:4px;
 }
 
-.nbnhhsh-inputting-list{
+.nbnhhsh-inputting-list {
 	color:#222;
 	padding:4px 0;
 }
-.nbnhhsh-inputting-list h5{
+.nbnhhsh-inputting-list h5 {
 	font-size:12px;
 	line-height:24px;
 	color:#999;
 }
-.nbnhhsh-inputting-item{
+.nbnhhsh-inputting-item {
 	margin-right:4px;
 }
-.nbnhhsh-notran-box{
+.nbnhhsh-notran-box {
 	padding:4px 0;
 	color:#999;
 	cursor: pointer;
 }
-.nbnhhsh-add-btn{
+.nbnhhsh-add-btn {
 	position: absolute;
 	top:0;
 	right:0;
@@ -70,10 +70,10 @@
 	font-weight: bold;
 	cursor: pointer;
 }
-.nbnhhsh-add-btn:after{
+.nbnhhsh-add-btn:after {
 	content: '+';
 }
-.nbnhhsh-loading{
+.nbnhhsh-loading {
 	text-align: center;
 	color:#999;
 	padding:20px 0;

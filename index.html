@@ -144,8 +144,9 @@
 					submitTran,
 					nbnhhsh(){
 						let text = this.text;
-						app.show = !!text;
-						if(text){
+						app.show = !!text && /[a-z0-9]/.test(text)
+
+						if(app.show){
 
 							_guess(text,data=>{
 

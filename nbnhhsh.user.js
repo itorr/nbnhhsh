@@ -57,10 +57,10 @@ let nbnhhsh = ()=>{
 	let selection = window.getSelection();
 	let text = selection.toString().trim();
 
-	app.show = !!text;
+	app.show = !!text && /[a-z0-9]/.test(text)
 	// app.show = true;
 
-	if(text){
+	if(app.show){
 		let rect = selection.getRangeAt(0).getBoundingClientRect();
 
 		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;

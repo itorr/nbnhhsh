@@ -87,56 +87,58 @@
 		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
 	</div>
 
-	<script src="//cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
 	<script>
 		(()=>{
-			let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
-			let Nbnhhsh = {};
+			const APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
+			const Nbnhhsh = {};
 
-			let guess = (text,onOver)=>{
+			const request = (method,url,data,onOver)=>{
+				let x = new XMLHttpRequest();
+				x.open(method,url);
+				x.setRequestHeader('content-type', 'application/json');
+				x.withCredentials = true;
+				x.onload = ()=> onOver(guess.x.responseText?JSON.parse(guess.x.responseText):guess.x.responseText);
+				x.send(JSON.stringify(data));
+				return x;
+			};
+
+			const guess = (text,onOver)=>{
+				text = text.trim();
 
 				if(Nbnhhsh[text]){
 					return onOver(Nbnhhsh[text]);
 				}
+
 				if(guess.x){
 					guess.x.abort();
 				}
 				app.loading = true;
-				guess.x = new XMLHttpRequest();
-				guess.x.open('POST',APIURL+'guess');
-				guess.x.setRequestHeader('content-type', 'application/json');
-				guess.x.withCredentials = true;
-				guess.x.onload = ()=>{
+				guess.x = request('POST',APIURL+'guess',{text},data=>{
+					Nbnhhsh[text] = data;
+					onOver(data);
 					app.loading = false;
-					let data = JSON.parse(guess.x.responseText);
-
-					onOver(Nbnhhsh[text] = data);
-				};
-
-				guess.x.send(JSON.stringify({text}));
+				});
 			};
-			let _guess = (text,onOver)=>{
+
+			const _guess = (text,onOver)=>{
 				clearTimeout(_guess.t);
 				_guess.t=setTimeout(guess.bind(this,text,onOver),300);
 			};
-			let submitTran = (name)=>{
 
+			const submitTran = name=>{
 				let text = prompt('输入缩写对应文字','');
 
 				if(!text || !text.trim || !text.trim()){
 					return;
 				}
 
-				let x = new XMLHttpRequest();
-				x.open('POST',APIURL+'translation/'+name);
-				x.setRequestHeader('content-type', 'application/json');
-				x.withCredentials = true;
-				x.onload = ()=>{
+				request('POST',APIURL+'translation/'+name,{text},()=>{
 					alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
-				};
-				x.send(JSON.stringify({text}));
+				});
 			};
-			let app = new Vue({
+
+			const app = new Vue({
 				el,
 				data: {
 					text:'',
@@ -148,31 +150,33 @@
 					submitTran,
 					nbnhhsh(){
 						let text = this.text;
-						app.show = !!text && /[a-z0-9]/i.test(text)
+						app.show = !!text && /[a-z0-9]/i.test(text);
 
-						if(app.show){
-
-							_guess(text,data=>{
-
-								if(data.error){
-									app.error = data.error;
-								}else{
-									app.error = null;
-									app.tags = data;
-								}
-							});
+						if(!app.show){
+							return;
 						}
+
+						_guess(text,data=>{
+							if(data.error){
+								app.error = data.error;
+							}else{
+								app.error = null;
+								app.tags = data;
+							}
+						});
 					}
 				}
 			});
 
-			let j = (src,el) =>{
-				el = document.createElement('script');
+			const loadJS = (src,onOver) =>{
+				let el = document.createElement('script');
 				el.src = src;
+				el.onload = onOver;
 				document.body.appendChild(el);
 			};
+
 			setTimeout(()=>{
-				j('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
+				loadJS('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
 			},400);
 		})();
 	</script>

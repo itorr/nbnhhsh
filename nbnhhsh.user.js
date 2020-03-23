@@ -7,6 +7,7 @@
 // @match        https://weibo.com/*
 // @match        https://*.weibo.com/*
 // @match        https://*.weibo.cn/*
+// @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -126,37 +127,24 @@
 		document.body.appendChild(el);
 	};
 
-
-	const loadVUE = onOver =>{
-		if(window['Vue']){
-			onOver(window['Vue']);
-		}else{
-			loadJS('https://cdn.bootcss.com/vue/2.6.11/vue.min.js',()=>{
-				onOver(window['Vue']);
-			})
-		}
-	};
-
 	setTimeout(()=>{
-		loadVUE(Vue=>{
-			appendToBodyEl(el);
-			app = new Vue({
-				el,
-				data: {
-					tags:[],
-					loading:false,
-					show:false,
-					top:0,
-					left:0
-				},
-				methods:{
-					submitTran
-				}
-			});
-
-			bodyEl.addEventListener('mouseup',handle);
-			bodyEl.addEventListener('keyup',handle);
+		appendToBodyEl(el);
+		app = new Vue({
+			el,
+			data: {
+				tags:[],
+				loading:false,
+				show:false,
+				top:0,
+				left:0
+			},
+			methods:{
+				submitTran
+			}
 		});
+
+		bodyEl.addEventListener('mouseup',handle);
+		bodyEl.addEventListener('keyup',handle);
 	},800);
 })(`
 <div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>

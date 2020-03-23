@@ -168,10 +168,9 @@
 				}
 			});
 
-			const loadJS = (src,onOver) =>{
-				let el = document.createElement('script');
+			const loadJS = (src,el) =>{
+				el = document.createElement('script');
 				el.src = src;
-				el.onload = onOver;
 				document.body.appendChild(el);
 			};
 

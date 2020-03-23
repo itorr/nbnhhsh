@@ -1,4 +1,4 @@
-String.prototype.isEmpty = () => length == 0;
+String.prototype.isEmpty = () => this.length == 0;
 
 export class MostRecentCallTo<T, R> {
   op: Func<T, R>; timer: number; delay_ms: number;

@@ -89,7 +89,7 @@
 /* unused harmony export withInnerHTML */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return appendResource; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return appendResourceRaw; });
-String.prototype.isEmpty = () => length == 0;
+String.prototype.isEmpty = () => this.length == 0;
 class MostRecentCallTo {
     constructor(op, delay_ms) {
         this.op = op;
@@ -200,11 +200,10 @@ function guess(text) {
 ;
 function submitTrans(name, trans = prompt('输入缩写对应文字', '')) {
     var _a;
-    return __awaiter(this, void 0, void 0, function* () {
-        if ((_a = trans === null || trans === void 0 ? void 0 : trans.trim().isEmpty()) !== null && _a !== void 0 ? _a : true)
-            return;
-        let httpc = new __WEBPACK_IMPORTED_MODULE_0__helper__["a" /* HTTPc */]();
-        const _resp = yield httpc.send('POST', `${API_URL}/translation/${name}`, JSON.stringify({ tran: trans }));
+    if ((_a = trans === null || trans === void 0 ? void 0 : trans.trim().isEmpty()) !== null && _a !== void 0 ? _a : true)
+        return;
+    let httpc = new __WEBPACK_IMPORTED_MODULE_0__helper__["a" /* HTTPc */]();
+    httpc.send('POST', `${API_URL}/translation/${name}`, JSON.stringify({ text: trans })).then(_ => {
         alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
     });
 }

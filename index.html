@@ -11,9 +11,10 @@
 <body>
 	<header>
 		<h1>能不能好好说话？</h1>
+		<p>😩</p>
 		<p>拼音首字母缩写释义工具</p>
 	</header>
-	<div id="el">
+	<div id="editor">
 		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh()"></textarea>
 
 		<div class="func-nbnhhsh-box" v-if="show">
@@ -26,19 +27,16 @@
 					<div class="nbnhhsh-tran-list" v-if="tag.trans">
 						<span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
 					</div>
-					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
-						无对应文字
-					</div>
 					<div v-else-if="tag.inputting && tag.inputting.length !==0">
 						<div class="nbnhhsh-inputting-list">
 							<h5>有可能是</h5>
 							<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
 						</div>
 					</div>
-					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
+					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTrans(tag.name)">
 						尚未录入，我来提交对应文字
 					</div>
-					<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+					<a @click.prevent="submitTrans(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
 				</div>
 			</div>
 			<div class="nbnhhsh-loading" v-else>
@@ -61,121 +59,18 @@
 		</blockquote>
 
 		<h2>为什么做这东西？</h2>
-		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让更多人能勉强理解这一门另类沟通方式、做了这一个划词转义工具。</p>
-
-		<h2>什么是用户脚本？</h2>
-		<p>用户脚本是一段代码，它们能够优化您的网页浏览体验。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。</p>
-		<p>安装过程可参考 <a href="https://greasyfork.org/zh-CN/#home-step-1" target="_blank">https://greasyfork.org/zh-CN/</a> 首页的，<b>第一步：安装一个用户脚本管理器</b> 章节</p>
-
-		<h2>如何安装网页划词释义用户脚本？</h2>
-		<p>安装好用户脚本浏览器插件之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
+		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让常人勉强能理解这一门另类沟通方式、做了这一个划词翻译油猴脚本。</p>
+		<h2>油猴脚本</h2>
+		<p>安装好油猴脚本浏览器插件之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
 		<blockquote>
-			<p>脚本版本目前仅会在 <code>https://weibo.com/</code> 页面下运行，划词时会提交所选文字以用于转义。</p>
+			<p>脚本版本目前仅会在 <code>https://weibo.com/*</code> 页面下运行，划词时会提交所选文字以用于转义。</p>
 		</blockquote>
-
-		<h2>如何在更多网站上使用这个用户脚本？</h2>
-		<p>在对应的用户脚本配置里可以设置 <b>用户匹配</b>，添加对应 URL 规则即可。</p>
-
 		<h2>贡献词条</h2>
 		<p>在每一个词条右上角都有 <code>+</code> 图标的按钮，点击可以提交对应文字，审核后会整理录入。</p>
-
-		<h2>有更离谱的例文？</h2>
-		<p>请用任意方式发我！😖</p>
-
-
-		<h2>仓库地址</h2>
-		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
 	</div>
 
-	<script src="//cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
-	<script>
-		(()=>{
-			let APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
-			let Nbnhhsh = {};
-
-			let guess = (text,onOver)=>{
-
-				if(Nbnhhsh[text]){
-					return onOver(Nbnhhsh[text]);
-				}
-				if(guess.x){
-					guess.x.abort();
-				}
-				app.loading = true;
-				guess.x = new XMLHttpRequest();
-				guess.x.open('POST',APIURL+'guess');
-				guess.x.setRequestHeader('content-type', 'application/json');
-				guess.x.withCredentials = true;
-				guess.x.onload = ()=>{
-					app.loading = false;
-					let data = JSON.parse(guess.x.responseText);
-
-					onOver(Nbnhhsh[text] = data);
-				};
-
-				guess.x.send(JSON.stringify({text}));
-			};
-			let _guess = (text,onOver)=>{
-				clearTimeout(_guess.t);
-				_guess.t=setTimeout(guess.bind(this,text,onOver),300);
-			};
-			let submitTran = (name)=>{
-
-				let text = prompt('输入缩写对应文字','');
-
-				if(!text || !text.trim || !text.trim()){
-					return;
-				}
-
-				let x = new XMLHttpRequest();
-				x.open('POST',APIURL+'translation/'+name);
-				x.setRequestHeader('content-type', 'application/json');
-				x.withCredentials = true;
-				x.onload = ()=>{
-					alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
-				};
-				x.send(JSON.stringify({text}));
-			};
-			let app = new Vue({
-				el,
-				data: {
-					text:'',
-					tags:[],
-					loading:false,
-					show:false
-				},
-				methods: {
-					submitTran,
-					nbnhhsh(){
-						let text = this.text;
-						app.show = !!text && /[a-z0-9]/i.test(text)
-
-						if(app.show){
-
-							_guess(text,data=>{
-
-								if(data.error){
-									app.error = data.error;
-								}else{
-									app.error = null;
-									app.tags = data;
-								}
-							});
-						}
-					}
-				}
-			});
-
-			let j = (src,el) =>{
-				el = document.createElement('script');
-				el.src = src;
-				document.body.appendChild(el);
-			};
-			setTimeout(()=>{
-				j('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
-			},400);
-		})();
-	</script>
+	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="dist/App.js"></script>
 	<script src="nbnhhsh.user.js"></script>
 </body>
 </html>

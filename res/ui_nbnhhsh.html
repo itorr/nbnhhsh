@@ -1,0 +1,21 @@
+<div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
+  <div class="nbnhhsh-loading" v-if="loading">加载中…</div>
+  <div class="nbnhhsh-tag-list" v-else-if="tags.length">
+    <div class="nbnhhsh-tag-item" v-for="tag in tags">
+      <h4>{{tag.name}}</h4>
+      <div class="nbnhhsh-tran-list" v-if="tag.trans">
+        <span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
+      </div>
+      <div v-else-if="tag.inputting && tag.inputting.length !==0">
+        <div class="nbnhhsh-inputting-list">
+          <h5>有可能是</h5>
+          <span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
+        </div>
+      </div>
+      <div class="nbnhhsh-notran-box" v-else @click.prevent="submitTrans(tag.name)">
+        尚未录入，我来提交对应文字
+      </div>
+      <a @click.prevent="submitTrans(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+    </div>
+  </div>
+</div>

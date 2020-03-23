@@ -21,7 +21,7 @@
 		x.open(method,url);
 		x.setRequestHeader('content-type', 'application/json');
 		x.withCredentials = true;
-		x.onload = ()=> onOver(guess.x.responseText?JSON.parse(guess.x.responseText):guess.x.responseText);
+		x.onload = ()=> onOver(x.responseText?JSON.parse(x.responseText):x.responseText);
 		x.send(JSON.stringify(data));
 		return x;
 	};
@@ -32,11 +32,12 @@
 			return onOver(Nbnhhsh[text]);
 		}
 
-		if(guess.x){
-			guess.x.abort();
+		if(guess._x){
+			guess._x.abort();
 		}
+
 		app.loading = true;
-		guess.x = request('POST',APIURL+'guess',{text},data=>{
+		guess._x = request('POST',APIURL+'guess',{text},data=>{
 			Nbnhhsh[text] = data;
 			onOver(data);
 			app.loading = false;
@@ -55,14 +56,25 @@
 	};
 
 	const getSelectionText = ()=>{
-		let selection = getSelection();
-		let text = selection.toString().trim();
+		let text = getSelection().toString().trim();
 
 		if(!!text && /[a-z0-9]/i.test(text)){
 			return text;
 		}else{
 			return null;
 		}
+	};
+
+	const setPosition = ()=>{
+		let rect = getSelection().getRangeAt(0).getBoundingClientRect();
+
+		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+		let top  = Math.floor( scrollTop + rect.top +rect.height );
+		let left = Math.floor( rect.left );
+
+		app.top = top;
+		app.left = left;
 	};
 
 	const timer = ()=>{
@@ -82,50 +94,40 @@
 			return;
 		}
 
-		let rect = getSelection().getRangeAt(0).getBoundingClientRect();
-
-		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-		let top  = Math.floor( scrollTop + rect.top +rect.height );
-		let left = Math.floor( rect.left );
-
-		app.top = top;
-		app.left = left;
+		setPosition();
 
 		guess(text,data=>{
-			if(data.error){
-				app.error = data.error;
+			if(!data.length){
+				app.show = false;
 			}else{
-				app.error = null;
 				app.tags = data;
-				if(!data.length){
-					app.show = false;
-				}
 			}
 		});
-		timer();
+
+		setTimeout(timer,300);
 	};
+
 	const handle = ()=>{
 		setTimeout(nbnhhsh,1);
 	};
 
-
 	const bodyEl = document.body;
-	
-	const createEl = html=>{
-		createEl.el.innerHTML = html;
-		return createEl.el.children[0];
-	};
-	createEl.el = document.createElement('div');
 
-	const appendToBodyEl = el=>{
+	bodyEl.addEventListener('mouseup',handle);
+	bodyEl.addEventListener('keyup',handle);
+
+
+	const createEl = (html)=>{
+		createEl._el.innerHTML = html;
+		let el=createEl._el.children[0];
 		bodyEl.appendChild(el);
+		return el;
 	};
+	createEl._el = document.createElement('div');
 
-	appendToBodyEl(createEl(`<style>${cssText}</style>`));
+	createEl(`<style>${cssText}</style>`);
 
 	const el = createEl(htmlText);
-	appendToBodyEl(el);
 
 	const app = new Vue({
 		el,
@@ -141,8 +143,7 @@
 		}
 	});
 
-	bodyEl.addEventListener('mouseup',handle);
-	bodyEl.addEventListener('keyup',handle);
+
 })(`
 <div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
 	<div class="nbnhhsh-loading" v-if="loading">

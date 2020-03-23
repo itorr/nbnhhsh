@@ -1,0 +1,8 @@
+{
+  "include": ["src/*.ts"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "outDir": "dist"
+  }
+}

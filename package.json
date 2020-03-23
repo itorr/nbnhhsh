@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "typescript": "^3.8",
+    "webpack": "^3.2",
+    "raw-loader": "^4"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "tsc && webpack && node gen_nbnhhsh.user.js",
+    "clean": "rm -rf dist/"
+  }
+}

@@ -25,6 +25,7 @@
 		x.send(JSON.stringify(data));
 		return x;
 	};
+
 	const guess = (text,onOver)=>{
 		text = text.trim();
 
@@ -43,6 +44,7 @@
 			app.loading = false;
 		});
 	};
+
 	const submitTran = name=>{
 		let text = prompt('输入缩写对应文字','');
 
@@ -111,19 +113,17 @@
 		setTimeout(nbnhhsh,1);
 	};
 
-	const bodyEl = document.body;
-
-	bodyEl.addEventListener('mouseup',handle);
-	bodyEl.addEventListener('keyup',handle);
-
+	document.body.addEventListener('mouseup',handle);
+	document.body.addEventListener('keyup',handle);
 
 	const createEl = (html)=>{
 		createEl._el.innerHTML = html;
 		let el=createEl._el.children[0];
-		bodyEl.appendChild(el);
+		document.body.appendChild(el);
 		return el;
 	};
 	createEl._el = document.createElement('div');
+
 
 	createEl(`<style>${cssText}</style>`);
 

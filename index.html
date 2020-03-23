@@ -98,7 +98,7 @@
 				x.open(method,url);
 				x.setRequestHeader('content-type', 'application/json');
 				x.withCredentials = true;
-				x.onload = ()=> onOver(guess.x.responseText?JSON.parse(x.responseText):x.responseText);
+				x.onload = ()=> onOver(x.responseText?JSON.parse(x.responseText):x.responseText);
 				x.send(JSON.stringify(data));
 				return x;
 			};

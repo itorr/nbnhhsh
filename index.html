@@ -109,11 +109,11 @@
 					return onOver(Nbnhhsh[text]);
 				}
 
-				if(guess.x){
-					guess.x.abort();
+				if(guess._x){
+					guess._x.abort();
 				}
 				app.loading = true;
-				guess.x = request('POST',APIURL+'guess',{text},data=>{
+				guess._x = request('POST',APIURL+'guess',{text},data=>{
 					Nbnhhsh[text] = data;
 					onOver(data);
 					app.loading = false;

@@ -144,7 +144,7 @@
 					submitTran,
 					nbnhhsh(){
 						let text = this.text;
-						app.show = !!text && /[a-z0-9]/.test(text)
+						app.show = !!text && /[a-z0-9]/i.test(text)
 
 						if(app.show){
 

@@ -15,7 +15,6 @@
 
 	const APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
 	const Nbnhhsh = {};
-	let app;
 
 	const request = (method,url,data,onOver)=>{
 		let x = new XMLHttpRequest();
@@ -55,49 +54,56 @@
 		});
 	};
 
-	let lastText = null;
-	const timer = ()=>{
-		let selection = window.getSelection();
+	const getSelectionText = ()=>{
+		let selection = getSelection();
 		let text = selection.toString().trim();
 
-		let show = !!text && /[a-z0-9]/i.test(text);
+		if(!!text && /[a-z0-9]/i.test(text)){
+			return text;
+		}else{
+			return null;
+		}
+	};
 
-		if(show){
+	const timer = ()=>{
+		if(getSelectionText()){
 			setTimeout(timer,300);
 		}else{
 			app.show = false;
 		}
 	};
+
 	const nbnhhsh = ()=>{
-		let selection = window.getSelection();
-		let text = selection.toString().trim();
+		let text = getSelectionText();
 
-		app.show = !!text && /[a-z0-9]/i.test(text);
+		app.show = !!text;
 
-		if(app.show){
-			let rect = selection.getRangeAt(0).getBoundingClientRect();
-
-			let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-			let top  = Math.floor( scrollTop + rect.top +rect.height );
-			let left = Math.floor( rect.left );
-
-			app.top = top;
-			app.left = left;
-
-			guess(text,data=>{
-				if(data.error){
-					app.error = data.error;
-				}else{
-					app.error = null;
-					app.tags = data;
-					if(!data.length){
-						app.show = false;
-					}
-				}
-			});
-			timer();
+		if(!app.show){
+			return;
 		}
+
+		let rect = getSelection().getRangeAt(0).getBoundingClientRect();
+
+		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+		let top  = Math.floor( scrollTop + rect.top +rect.height );
+		let left = Math.floor( rect.left );
+
+		app.top = top;
+		app.left = left;
+
+		guess(text,data=>{
+			if(data.error){
+				app.error = data.error;
+			}else{
+				app.error = null;
+				app.tags = data;
+				if(!data.length){
+					app.show = false;
+				}
+			}
+		});
+		timer();
 	};
 	const handle = ()=>{
 		setTimeout(nbnhhsh,1);
@@ -116,36 +122,27 @@
 		bodyEl.appendChild(el);
 	};
 
-	const el = createEl(htmlText);
-
 	appendToBodyEl(createEl(`<style>${cssText}</style>`));
 
-	const loadJS = (src,onOver) =>{
-		let el = document.createElement('script');
-		el.src = src;
-		el.onload = onOver;
-		document.body.appendChild(el);
-	};
+	const el = createEl(htmlText);
+	appendToBodyEl(el);
 
-	setTimeout(()=>{
-		appendToBodyEl(el);
-		app = new Vue({
-			el,
-			data: {
-				tags:[],
-				loading:false,
-				show:false,
-				top:0,
-				left:0
-			},
-			methods:{
-				submitTran
-			}
-		});
+	const app = new Vue({
+		el,
+		data: {
+			tags:[],
+			loading:false,
+			show:false,
+			top:0,
+			left:0
+		},
+		methods:{
+			submitTran
+		}
+	});
 
-		bodyEl.addEventListener('mouseup',handle);
-		bodyEl.addEventListener('keyup',handle);
-	},800);
+	bodyEl.addEventListener('mouseup',handle);
+	bodyEl.addEventListener('keyup',handle);
 })(`
 <div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
 	<div class="nbnhhsh-loading" v-if="loading">

@@ -10,20 +10,19 @@ export async function guess(text: string) {
   if (cachedWords[text]) return cachedWords[text];
 
   app.loading = true;
-  const resp = await httpc.send('POST', `${API_URL}/guess`, JSON.stringify({ text }));
+  let resp = await httpc.send('POST', `${API_URL}/guess`, JSON.stringify({ text }));
   app.loading = false;
   let data = JSON.parse(resp);
   cachedWords[text] = data;
   return data;
 };
 
-export function submitTrans(name: string, trans: string = prompt('输入缩写对应文字', '')) {
+export async function submitTrans(name: string, trans: string = prompt('输入缩写对应文字', '')) {
   if (trans?.trim().isEmpty() ?? true) return;
 
   let httpc = new HTTPc();
-  httpc.send('POST', `${API_URL}/translation/${name}`, JSON.stringify({ text: trans })).then(_ => {
-    alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
-  });
+  let _resp = httpc.send('POST', `${API_URL}/translation/${name}`, JSON.stringify({ text: trans }))
+  alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
 };
 
 export function getSelectionText() {

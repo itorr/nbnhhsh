@@ -34,7 +34,7 @@ export class HTTPc {
 }
 
 export function recheckWhileDelayed(predicate: Producer<boolean>, delay_ms: number, action: Function) {
-  if (predicate()) action();
+  if (!predicate()) action();
   else setTimeout(recheckWhileDelayed.bind(null, predicate, delay_ms, action), delay_ms);
 }
 

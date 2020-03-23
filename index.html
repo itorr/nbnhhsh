@@ -156,10 +156,9 @@
 						}
 
 						_guess(text,data=>{
-							if(data.error){
-								app.error = data.error;
+							if(!data.length){
+								app.show = false;
 							}else{
-								app.error = null;
 								app.tags = data;
 							}
 						});

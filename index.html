@@ -166,14 +166,14 @@
 				}
 			});
 
-			const loadJS = (src,el) =>{
+			const loadScript = (src,el) =>{
 				el = document.createElement('script');
 				el.src = src;
 				document.body.appendChild(el);
 			};
 
 			setTimeout(()=>{
-				loadJS('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
+				loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
 			},400);
 		})();
 	</script>

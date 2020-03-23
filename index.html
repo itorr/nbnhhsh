@@ -3,10 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>能不能好好说话？</title>
+	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<link rel="stylesheet" href="res/base.css">
 	<link rel="stylesheet" href="res/document.css">
-	<link rel="stylesheet" href="res/nbnhhsh.css">
-	<meta name="viewport" content="width=device-width,user-scalable=0">
 </head>
 <body>
 	<header>
@@ -18,9 +17,7 @@
 		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh()"></textarea>
 
 		<div class="func-nbnhhsh-box" v-if="show">
-			<div class="nbnhhsh-loading" v-if="loading">
-				加载中…
-			</div>
+			<div class="nbnhhsh-loading" v-if="loading">加载中…</div>
 			<div class="nbnhhsh-tag-list" v-else-if="tags.length">
 				<div class="nbnhhsh-tag-item" v-for="tag in tags">
 					<h4>{{tag.name}}</h4>
@@ -39,12 +36,10 @@
 					<a @click.prevent="submitTrans(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
 				</div>
 			</div>
-			<div class="nbnhhsh-loading" v-else>
-				没有匹配到拼音首字母缩写
-			</div>
-
+			<div class="nbnhhsh-loading" v-else>没有匹配到拼音首字母缩写</div>
 		</div>
 	</div>
+
 	<div class="content-box">
 		<h2>例文</h2>
 		<blockquote>

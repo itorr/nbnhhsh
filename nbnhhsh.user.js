@@ -7,6 +7,7 @@
 // @match        https://weibo.com/*
 // @match        https://*.weibo.com/*
 // @match        https://*.weibo.cn/*
+// @match        https://tieba.baidu.com/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

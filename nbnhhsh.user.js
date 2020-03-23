@@ -6,6 +6,7 @@
 // @author       itorr
 // @match        https://weibo.com/*
 // @match        https://*.weibo.com/*
+// @match        https://*.weibo.cn/*
 // @grant        none
 // ==/UserScript==
 

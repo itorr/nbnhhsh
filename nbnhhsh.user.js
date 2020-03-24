@@ -12,7 +12,7 @@
 // @grant        none
 // ==/UserScript==
 
-((htmlText,cssText)=>{
+let Nbnhhsh = ((htmlText,cssText)=>{
 
 	const API_URL = 'https://lab.magiconch.com/api/nbnhhsh/';
 
@@ -144,7 +144,11 @@
 		}
 	});
 
+	return {
+		guess,
+		submitTran,
 
+	}
 })(`
 <div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
 	<div class="nbnhhsh-loading" v-if="loading">

@@ -87,96 +87,50 @@
 	</div>
 
 	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="nbnhhsh.user.js"></script>
 	<script>
-		(()=>{
-			const API_URL = 'https://lab.magiconch.com/api/nbnhhsh/';
+		let guessTimer;
+		const app = new Vue({
+			el,
+			data: {
+				text:'',
+				tags:[],
+				show:false,
+				loading:false,
+			},
+			methods: {
+				submitTran:Nbnhhsh.submitTran,
+				nbnhhsh(){
+					let text = this.text;
+					app.show = !!text && /[a-z0-9]/i.test(text);
 
-			const request = (method,url,data,onOver)=>{
-				let x = new XMLHttpRequest();
-				x.open(method,url);
-				x.setRequestHeader('content-type', 'application/json');
-				x.withCredentials = true;
-				x.onload = ()=> onOver(x.responseText ? JSON.parse(x.responseText) : null);
-				x.send(JSON.stringify(data));
-				return x;
-			};
+					if(!app.show){
+						return;
+					}
 
-			const Guess = {};
-			const guess = (text,onOver)=>{
-				text = text.trim();
-
-				if(Guess[text]){
-					return onOver(Guess[text]);
-				}
-
-				if(guess._request){
-					guess._request.abort();
-				}
-				app.loading = true;
-				guess._request = request('POST',API_URL+'guess',{text},data=>{
-					Guess[text] = data;
-					onOver(data);
-					app.loading = false;
-				});
-			};
-
-			const _guess = (text,onOver)=>{
-				clearTimeout(_guess.t);
-				_guess.t=setTimeout(guess.bind(this,text,onOver),300);
-			};
-
-			const submitTran = name=>{
-				let text = prompt('输入缩写对应文字','');
-
-				if(!text || !text.trim || !text.trim()){
-					return;
-				}
-
-				request('POST',API_URL+'translation/'+name,{text},()=>{
-					alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
-				});
-			};
-
-			const app = new Vue({
-				el,
-				data: {
-					text:'',
-					tags:[],
-					show:false,
-					loading:false,
-				},
-				methods: {
-					submitTran,
-					nbnhhsh(){
-						let text = this.text;
-						app.show = !!text && /[a-z0-9]/i.test(text);
-
-						if(!app.show){
-							return;
-						}
-
-						_guess(text,data=>{
+					clearTimeout(guessTimer);
+					guessTimer = setTimeout(()=>{
+						Nbnhhsh.guess(text,data=>{
 							if(!data.length){
 								app.show = false;
 							}else{
 								app.tags = data;
 							}
 						});
-					}
+					},400);
 				}
-			});
+			}
+		});
 
-			const loadScript = (src,el) =>{
-				el = document.createElement('script');
-				el.src = src;
-				document.body.appendChild(el);
-			};
+		const loadScript = (src,el) =>{
+			el = document.createElement('script');
+			el.src = src;
+			document.body.appendChild(el);
+		};
 
-			setTimeout(()=>{
-				loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
-			},400);
-		})();
+		setTimeout(()=>{
+			loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
+		},400);
 	</script>
-	<script src="nbnhhsh.user.js"></script>
 </body>
 </html>

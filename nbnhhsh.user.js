@@ -14,33 +14,33 @@
 
 ((htmlText,cssText)=>{
 
-	const APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
-	const Nbnhhsh = {};
+	const API_URL = 'https://lab.magiconch.com/api/nbnhhsh/';
 
 	const request = (method,url,data,onOver)=>{
 		let x = new XMLHttpRequest();
 		x.open(method,url);
 		x.setRequestHeader('content-type', 'application/json');
 		x.withCredentials = true;
-		x.onload = ()=> onOver(x.responseText?JSON.parse(x.responseText):x.responseText);
+		x.onload = ()=> onOver(x.responseText ? JSON.parse(x.responseText) : null);
 		x.send(JSON.stringify(data));
 		return x;
 	};
 
+	const Guess = {};
 	const guess = (text,onOver)=>{
 		text = text.trim();
 
-		if(Nbnhhsh[text]){
-			return onOver(Nbnhhsh[text]);
+		if(Guess[text]){
+			return onOver(Guess[text]);
 		}
 
-		if(guess._x){
-			guess._x.abort();
+		if(guess._request){
+			guess._request.abort();
 		}
 
 		app.loading = true;
-		guess._x = request('POST',APIURL+'guess',{text},data=>{
-			Nbnhhsh[text] = data;
+		guess._request = request('POST',API_URL+'guess',{text},data=>{
+			Guess[text] = data;
 			onOver(data);
 			app.loading = false;
 		});
@@ -53,7 +53,7 @@
 			return;
 		}
 
-		request('POST',APIURL+'translation/'+name,{text},()=>{
+		request('POST',API_URL+'translation/'+name,{text},()=>{
 			alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
 		});
 	};
@@ -68,7 +68,7 @@
 		}
 	};
 
-	const setPosition = ()=>{
+	const fixPosition = ()=>{
 		let rect = getSelection().getRangeAt(0).getBoundingClientRect();
 
 		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -97,7 +97,7 @@
 			return;
 		}
 
-		setPosition();
+		fixPosition();
 
 		guess(text,data=>{
 			if(!data.length){
@@ -110,16 +110,16 @@
 		setTimeout(timer,300);
 	};
 
-	const handle = ()=>{
+	const _nbnhhsh = ()=>{
 		setTimeout(nbnhhsh,1);
 	};
 
-	document.body.addEventListener('mouseup',handle);
-	document.body.addEventListener('keyup',handle);
+	document.body.addEventListener('mouseup',_nbnhhsh);
+	document.body.addEventListener('keyup',_nbnhhsh);
 
 	const createEl = (html)=>{
 		createEl._el.innerHTML = html;
-		let el=createEl._el.children[0];
+		let el = createEl._el.children[0];
 		document.body.appendChild(el);
 		return el;
 	};
@@ -134,8 +134,8 @@
 		el,
 		data: {
 			tags:[],
-			loading:false,
 			show:false,
+			loading:false,
 			top:0,
 			left:0
 		},

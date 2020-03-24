@@ -89,32 +89,32 @@
 	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
 	<script>
 		(()=>{
-			const APIURL = 'https://lab.magiconch.com/api/nbnhhsh/';
-			const Nbnhhsh = {};
+			const API_URL = 'https://lab.magiconch.com/api/nbnhhsh/';
 
 			const request = (method,url,data,onOver)=>{
 				let x = new XMLHttpRequest();
 				x.open(method,url);
 				x.setRequestHeader('content-type', 'application/json');
 				x.withCredentials = true;
-				x.onload = ()=> onOver(x.responseText?JSON.parse(x.responseText):x.responseText);
+				x.onload = ()=> onOver(x.responseText ? JSON.parse(x.responseText) : null);
 				x.send(JSON.stringify(data));
 				return x;
 			};
 
+			const Guess = {};
 			const guess = (text,onOver)=>{
 				text = text.trim();
 
-				if(Nbnhhsh[text]){
-					return onOver(Nbnhhsh[text]);
+				if(Guess[text]){
+					return onOver(Guess[text]);
 				}
 
-				if(guess._x){
-					guess._x.abort();
+				if(guess._request){
+					guess._request.abort();
 				}
 				app.loading = true;
-				guess._x = request('POST',APIURL+'guess',{text},data=>{
-					Nbnhhsh[text] = data;
+				guess._request = request('POST',API_URL+'guess',{text},data=>{
+					Guess[text] = data;
 					onOver(data);
 					app.loading = false;
 				});
@@ -132,7 +132,7 @@
 					return;
 				}
 
-				request('POST',APIURL+'translation/'+name,{text},()=>{
+				request('POST',API_URL+'translation/'+name,{text},()=>{
 					alert('感谢对好好说话项目的支持！审核通过后这条对应将会生效');
 				});
 			};
@@ -142,8 +142,8 @@
 				data: {
 					text:'',
 					tags:[],
-					loading:false,
 					show:false
+					loading:false,
 				},
 				methods: {
 					submitTran,

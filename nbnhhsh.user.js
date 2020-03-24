@@ -8,6 +8,7 @@
 // @match        *://*.weibo.com/*
 // @match        *://*.weibo.cn/*
 // @match        *://tieba.baidu.com/*
+// @match        *://*.bilibili.com/
 // @match        *://*.bilibili.com/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none

@@ -137,7 +137,7 @@
 			show:false,
 			loading:false,
 			top:0,
-			left:0
+			left:0,
 		},
 		methods:{
 			submitTran

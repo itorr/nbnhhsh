@@ -9,7 +9,7 @@ https://lab.magiconch.com/nbnhhsh/
 ## 安装脚本
 安装好用户脚本浏览器插件之后，访问 [nbnhhsh.user.js](https://github.com/itorr/nbnhhsh/raw/master/nbnhhsh.user.js) 完成脚本安装
 
->脚本版本目前会在 **微博**、**贴吧** 页面下运行，划词时会提交所选文字以用于转义。
+>脚本版本目前会在 **微博**、**贴吧**、**哔哩哔哩** 页面下运行，划词时会提交所选文字以用于转义。
 
 
 ## 用户脚本是什么？
@@ -28,5 +28,8 @@ https://lab.magiconch.com/nbnhhsh/
 请用任意方式发我！😖
 
 ## 仓库地址
-
 [https://github.com/itorr/nbnhhsh](https://github.com/itorr/nbnhhsh)
+
+
+## GreasyFork
+[https://greasyfork.org/zh-CN/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)

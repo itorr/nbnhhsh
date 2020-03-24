@@ -1,13 +1,14 @@
 // ==UserScript==
-// @name         能不能好好说话
+// @name         能不能好好说话？
 // @namespace    https://lab.magiconch.com/nbnhhsh
-// @version      0.1
+// @version      0.11
 // @description  首字母缩写划词翻译工具
 // @author       itorr
-// @match        https://weibo.com/*
-// @match        https://*.weibo.com/*
-// @match        https://*.weibo.cn/*
-// @match        https://tieba.baidu.com/*
+// @match        *://weibo.com/*
+// @match        *://*.weibo.com/*
+// @match        *://*.weibo.cn/*
+// @match        *://tieba.baidu.com/*
+// @match        *://*.bilibili.com/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

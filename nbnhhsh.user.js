@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         能不能好好说话？
 // @namespace    https://lab.magiconch.com/nbnhhsh
-// @version      0.11
+// @version      0.12
 // @description  首字母缩写划词翻译工具
 // @author       itorr
 // @match        *://weibo.com/*
@@ -142,14 +142,13 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 			left:0,
 		},
 		methods:{
-			submitTran
+			submitTran,
 		}
 	});
 
 	return {
 		guess,
 		submitTran,
-
 	}
 })(`
 <div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>

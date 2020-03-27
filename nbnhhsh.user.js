@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         能不能好好说话？
 // @namespace    https://lab.magiconch.com/nbnhhsh
-// @version      0.12
+// @version      0.13
 // @description  首字母缩写划词翻译工具
 // @author       itorr
 // @match        *://weibo.com/*
@@ -30,7 +30,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 	const Guess = {};
 	const guess = (text,onOver)=>{
-		text = text.trim();
+		text = text.match(/[a-z0-9]+/ig).join(',');
 
 		if(Guess[text]){
 			return onOver(Guess[text]);
@@ -93,7 +93,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	const nbnhhsh = ()=>{
 		let text = getSelectionText();
 
-		app.show = !!text;
+		app.show = !!text && /[a-z0-9]/i.test(text);
 
 		if(!app.show){
 			return;
@@ -218,7 +218,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	padding:4px 0;
 }
 .nbnhhsh-tran-item{
-	margin-right:4px;
+	margin-right:10px;
 }
 
 .nbnhhsh-inputting-list{

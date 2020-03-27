@@ -108,11 +108,12 @@
 					let text = this.text;
 					app.show = !!text && /[a-z0-9]/i.test(text);
 
+					clearTimeout(guessTimer);
+
 					if(!app.show){
 						return;
 					}
 
-					clearTimeout(guessTimer);
 					guessTimer = setTimeout(()=>{
 						Nbnhhsh.guess(text,data=>{
 							if(!data.length){

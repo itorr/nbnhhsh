@@ -27,6 +27,13 @@ https://lab.magiconch.com/nbnhhsh/
 ## 有更离谱的例文？
 请用任意方式发我！😖
 
+## 给个人网站添加划词转义？
+在需要划词转义的页面 `</body>` 前添加如下代码即可。
+```HTML
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+<script src="nbnhhsh.user.js"></script>
+```
+
 ## 仓库地址
 [https://github.com/itorr/nbnhhsh](https://github.com/itorr/nbnhhsh)
 

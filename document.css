@@ -55,3 +55,10 @@ textarea{
 	color:#666;
 	background:rgba(0,0,0,.05);
 }
+
+pre{
+	background:#222;
+	color:#FFF;
+	padding:4px 8px;
+	line-height: 1.2;
+}

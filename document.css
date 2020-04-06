@@ -5,18 +5,25 @@ body{
 	max-width: 800px;
 	margin:0 auto;
 }
-header{
+head{
+	display: block;
 	text-align: center;
 	padding:60px 0;
 
 }
-header h1{
+title{
+	display: block;
+	font-weight:bold;
 	font-size:2.5em;
 
 }
-header 	p{
+meta[name="discription"]{
+	display: block;
 	padding:.5em 0;
 	color:#999;
+}
+meta[name="discription"]:after{
+	content: attr(content);
 }
 textarea{
 	display: block;

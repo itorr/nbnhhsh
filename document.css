@@ -68,4 +68,5 @@ pre{
 	color:#FFF;
 	padding:4px 8px;
 	line-height: 1.2;
+	overflow: auto;
 }

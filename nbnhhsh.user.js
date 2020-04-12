@@ -212,6 +212,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-tag-item h4{
 	font-weight:bold;
 	font-size:18px;
+	margin:0;
 }
 .nbnhhsh-tran-list{
 	color:#222;
@@ -229,6 +230,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	font-size:12px;
 	line-height:24px;
 	color:#999;
+	margin:0;
 }
 .nbnhhsh-inputting-item{
 	margin-right:4px;

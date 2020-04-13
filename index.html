@@ -114,43 +114,41 @@
 				nbnhhsh(){
 					let text = this.text;
 
+					app.show = !!text && /[a-z0-9]/i.test(text);
+
+					clearTimeout(guessTimer);
+
+					if(!app.show){
+						return;
+					}
+
+					guessTimer = setTimeout(()=>{
+						Nbnhhsh.guess(text,data=>{
+							if(!data.length){
+								app.show = false;
+							}else{
+								app.tags = data;
+							}
+						});
+					},400);
+
 					location.hash = text?'#/text/'+encodeURIComponent(text):'';
 				}
 			}
 		});
-		onhashchange = ()=>{
-			const searchStringArray = location.hash.substr(2).split('/');
 
-			const Search = {};
+		const searchStringArray = location.hash.substr(2).split('/');
 
-			for(let i = 0;i<searchStringArray.length;i+=2){
-				Search[decodeURIComponent(searchStringArray[i])] = decodeURIComponent(searchStringArray[i+1]);
-			}
+		const Search = {};
 
-			const text = Search.text || '';
+		for(let i = 0;i<searchStringArray.length;i+=2){
+			Search[decodeURIComponent(searchStringArray[i])] = decodeURIComponent(searchStringArray[i+1]);
+		}
 
-			app.text = text;
 
-			app.show = !!text && /[a-z0-9]/i.test(text);
+		app.text = Search.text || '';
 
-			clearTimeout(guessTimer);
-
-			if(!app.show){
-				return;
-			}
-
-			guessTimer = setTimeout(()=>{
-				Nbnhhsh.guess(text,data=>{
-					if(!data.length){
-						app.show = false;
-					}else{
-						app.tags = data;
-					}
-				});
-			},400);
-		};
-
-		onhashchange();
+		app.nbnhhsh();
 
 
 		const loadScript = (src,el) =>{

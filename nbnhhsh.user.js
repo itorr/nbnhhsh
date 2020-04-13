@@ -10,6 +10,8 @@
 // @match        *://tieba.baidu.com/*
 // @match        *://*.bilibili.com/
 // @match        *://*.bilibili.com/*
+// @match        *://*.douban.com/group/*
+// @match        *://douban.com/group/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

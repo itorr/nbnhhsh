@@ -12,6 +12,7 @@
 // @match        *://*.bilibili.com/*
 // @match        *://*.douban.com/group/*
 // @match        *://douban.com/group/*
+// @match        *://fanfou.com/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

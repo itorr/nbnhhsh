@@ -34,6 +34,9 @@ https://lab.magiconch.com/nbnhhsh/
 <script src="nbnhhsh.user.js"></script>
 ```
 
+## 打赏
+![支付宝打赏](sponsor.png)
+
 ## 仓库地址
 [https://github.com/itorr/nbnhhsh](https://github.com/itorr/nbnhhsh)
 

@@ -222,6 +222,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 }
 .nbnhhsh-tran-item{
 	margin-right:10px;
+	display:inline-block;
 }
 
 .nbnhhsh-inputting-list{
@@ -235,7 +236,8 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	margin:0;
 }
 .nbnhhsh-inputting-item{
-	margin-right:4px;
+	margin-right:10px;
+	display:inline-block;
 }
 .nbnhhsh-notran-box{
 	padding:4px 0;

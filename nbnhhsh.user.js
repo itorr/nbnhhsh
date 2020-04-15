@@ -80,8 +80,12 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		let top  = Math.floor( scrollTop + rect.top +rect.height );
 		let left = Math.floor( rect.left );
 
+		if(top===0&&left===0){
+			app.show = false;
+		}
 		app.top = top;
 		app.left = left;
+
 	};
 
 	const timer = ()=>{

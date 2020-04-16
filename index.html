@@ -12,7 +12,7 @@
 	<div id="el">
 		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
 
-		<div class="func-nbnhhsh-box" v-if="show">
+		<div class="nbnhhsh-box nbnhhsh-box-doc" v-if="show">
 			<div class="nbnhhsh-loading" v-if="loading">
 				加载中…
 			</div>
@@ -20,7 +20,9 @@
 				<div class="nbnhhsh-tag-item" v-for="tag in tags">
 					<h4>{{tag.name}}</h4>
 					<div class="nbnhhsh-tran-list" v-if="tag.trans">
-						<span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
+						<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
+							{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
+						</span>
 					</div>
 					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
 						无对应文字
@@ -111,7 +113,7 @@
 				loading:false,
 			},
 			methods: {
-				submitTran:Nbnhhsh.submitTran,
+				...Nbnhhsh,
 				nbnhhsh(){
 					let text = this.text;
 
@@ -124,7 +126,7 @@
 					}
 
 					guessTimer = setTimeout(()=>{
-						Nbnhhsh.guess(text,data=>{
+						this.guess(text,data=>{
 							if(!data.length){
 								app.show = false;
 							}else{

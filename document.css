@@ -36,10 +36,12 @@ textarea{
 	box-shadow:0 0 0 2px #999 inset;
 
 }
-.func-nbnhhsh-box{
+.nbnhhsh-box-doc{
 	padding:20px 0;
 }
-
+.nbnhhsh-box-doc .nbnhhsh-tag-item:nth-child(even){
+	background:rgba(255,255,255,.5);
+}
 .content-box{
 	padding:20px 10px 400px;
 }

@@ -62,6 +62,23 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		});
 	};
 
+	const transArrange = trans=>{
+		return trans.map(tran=>{
+			const match = tran.match(/^(.+?)([（\(](.+?)[）\)])?$/);
+
+			if(match.length === 4){
+				return {
+					text:match[1],
+					sub:match[3]
+				}
+			}else{
+				return {
+					text:tran
+				}
+			}
+		})
+	};
+
 	const getSelectionText = ()=>{
 		let text = getSelection().toString().trim();
 
@@ -80,7 +97,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		let top  = Math.floor( scrollTop + rect.top +rect.height );
 		let left = Math.floor( rect.left );
 
-		if(top===0&&left===0){
+		if(top === 0 && left === 0){
 			app.show = false;
 		}
 		app.top = top;
@@ -149,15 +166,17 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		},
 		methods:{
 			submitTran,
+			transArrange,
 		}
 	});
 
 	return {
 		guess,
 		submitTran,
+		transArrange,
 	}
 })(`
-<div class="nbnhhsh-box" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
+<div class="nbnhhsh-box nbnhhsh-box-pop" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
 	<div class="nbnhhsh-loading" v-if="loading">
 		加载中…
 	</div>
@@ -165,7 +184,9 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		<div class="nbnhhsh-tag-item" v-for="tag in tags">
 			<h4>{{tag.name}}</h4>
 			<div class="nbnhhsh-tran-list" v-if="tag.trans">
-				<span class="nbnhhsh-tran-item" v-for="tran in tag.trans">{{tran}}</span>
+				<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
+					{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
+				</span>
 			</div>
 			<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
 				无对应文字
@@ -185,15 +206,17 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 </div>
 `, `
 .nbnhhsh-box{
+	font:400 14px/1.4 sans-serif;
+}
+.nbnhhsh-box-pop{
 	position: absolute;
 	z-index:99999999999;
-	width: 210px;
+	width: 340px;
 	background:#FFF;
 	box-shadow: 0 3px 30px -4px rgba(0,0,0,.3);
 	margin: 10px 0 100px 0;
-	font:400 14px/1.4 sans-serif;
 }
-.nbnhhsh-box::before{
+.nbnhhsh-box-pop::before{
 	content: '';
 	position: absolute;
 	top:-7px;
@@ -204,6 +227,19 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 	border-top:1px;
 	border-bottom-color:#FFF;
+}
+.nbnhhsh-box sub{
+    vertical-align: middle;
+    
+    background: rgba(0,0,0,.07);
+    color: #777;
+    font-size: 12px;
+    line-height:16px;
+    display: inline-block;
+    padding: 0 3px;
+    margin:-1px 0 0 2px;
+    border-radius: 2px;
+    letter-spacing: -0.6px;
 }
 .nbnhhsh-tag-list{
 	/*padding:4px 0;*/
@@ -217,16 +253,19 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 }
 .nbnhhsh-tag-item h4{
 	font-weight:bold;
-	font-size:18px;
+	font-size:20px;
+	line-height:28px;
+    letter-spacing: 1.5px;
 	margin:0;
 }
 .nbnhhsh-tran-list{
-	color:#222;
+	color:#444;
 	padding:4px 0;
+	line-height:18px;
 }
 .nbnhhsh-tran-item{
-	margin-right:10px;
-	display:inline-block;
+    display: inline-block;
+    padding: 2px 15px 2px 0;
 }
 
 .nbnhhsh-inputting-list{
@@ -240,7 +279,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	margin:0;
 }
 .nbnhhsh-inputting-item{
-	margin-right:10px;
+	margin-right:14px;
 	display:inline-block;
 }
 .nbnhhsh-notran-box{

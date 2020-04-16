@@ -51,7 +51,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	};
 
 	const submitTran = name=>{
-		let text = prompt('输入缩写对应文字','');
+		let text = prompt('输入缩写对应文字 末尾可通过括号包裹（简略注明来源）','');
 
 		if(!text || !text.trim || !text.trim()){
 			return;

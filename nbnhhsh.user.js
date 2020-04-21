@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         能不能好好说话？
 // @namespace    https://lab.magiconch.com/nbnhhsh
-// @version      0.13
+// @version      0.14
 // @description  首字母缩写划词翻译工具
 // @author       itorr
 // @match        *://weibo.com/*
@@ -237,9 +237,10 @@ let Nbnhhsh = ((htmlText,cssText)=>{
     line-height:16px;
     display: inline-block;
     padding: 0 3px;
-    margin:-1px 0 0 2px;
+    margin:-2px 0 0 2px;
     border-radius: 2px;
     letter-spacing: -0.6px;
+    bottom:0;
 }
 .nbnhhsh-tag-list{
 	/*padding:4px 0;*/

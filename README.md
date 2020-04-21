@@ -47,7 +47,7 @@ https://lab.magiconch.com/nbnhhsh/
 
 
 ## 打赏
-![支付宝打赏](https://lab.magiconch.com/nbnhhsh/sponsor.png)
+![支付宝打赏](sponsor.png)
 
 ## 仓库地址
 [https://github.com/itorr/nbnhhsh](https://github.com/itorr/nbnhhsh)

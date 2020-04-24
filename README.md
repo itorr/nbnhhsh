@@ -42,8 +42,8 @@ https://lab.magiconch.com/nbnhhsh/
 
 [Alfred 工具流](https://github.com/TheColdVoid/nbnhhsh-alfred-workflow) @TheColdVoid
 
-[新 话 词 典](https://www.icloud.com/shortcuts/8c093ee5e7fd4930a62461bff6fe9f5e)
-一个简单的 iOS 快捷指令，在本地清除选中内容的主要文字后仅查询/提交包含的拼音数字缩写
+[新 话 词 典](https://www.icloud.com/shortcuts/4e92f17ef2fb42b093457978624f275b)
+一个简易的隐私向 iOS 快捷指令，在本地抹除选中内容的主要文字后仅查询/提交包含的拼音数字缩写
 
 ## GreasyFork
 [https://greasyfork.org/zh-CN/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)

@@ -13,7 +13,6 @@
 // @match        *://*.douban.com/group/*
 // @match        *://douban.com/group/*
 // @match        *://*.zhihu.com/*
-
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

@@ -62,6 +62,31 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		});
 	};
 
+	// word: 为要替换进页面的文本，需要传入字符串
+	const replace = (word) => {
+		let selection = window.getSelection()
+		let anchorOffset = selection.anchorOffset
+		let focusOffset = selection.focusOffset
+		let start, end
+		// anchorNode和focusNode可能是两个相邻的节点，此时以focusNode为准
+		if (selection.anchorNode !== selection.focusNode) {
+			start = 0
+			end = focusOffset
+		} else {
+			// 选择一段文本时可能是从右向左选，也可能是从左向右选，这里是将anchorOffset和focusOffset中的较大者赋给start，较小者赋给end
+			if (anchorOffset <= focusOffset) {
+				start = anchorOffset
+				end = focusOffset
+			} else {
+				start = focusOffset
+				end = anchorOffset
+			}
+		}
+
+		let selectedNode = selection.focusNode.nodeValue
+		selection.focusNode.nodeValue = selectedNode.substring(0, start) + word + selectedNode.substring(end)
+	};
+
 	const transArrange = trans=>{
 		return trans.map(tran=>{
 			const match = tran.match(/^(.+?)([（\(](.+?)[）\)])?$/);
@@ -163,10 +188,13 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 			loading:false,
 			top:0,
 			left:0,
+			// 鼠标停在查询结果上时的提示信息
+			notification: "点击以替换"
 		},
 		methods:{
 			submitTran,
 			transArrange,
+			replace
 		}
 	});
 
@@ -184,7 +212,8 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		<div class="nbnhhsh-tag-item" v-for="tag in tags">
 			<h4>{{tag.name}}</h4>
 			<div class="nbnhhsh-tran-list" v-if="tag.trans">
-				<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
+				<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)"
+				 @click="replace(tran.text)" v-bind:title="notification">
 					{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
 				</span>
 			</div>
@@ -194,7 +223,9 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 			<div v-else-if="tag.inputting && tag.inputting.length !==0">
 				<div class="nbnhhsh-inputting-list">
 					<h5>有可能是</h5>
-					<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
+					<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting"
+					@click="replace(input)" v-bind:title="notification"
+					>{{input}}</span>
 				</div>
 			</div>
 			<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
@@ -267,6 +298,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-tran-item{
     display: inline-block;
     padding: 2px 15px 2px 0;
+    cursor: pointer;
 }
 
 .nbnhhsh-inputting-list{
@@ -282,6 +314,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-inputting-item{
 	margin-right:14px;
 	display:inline-block;
+	cursor: pointer
 }
 .nbnhhsh-notran-box{
 	padding:4px 0;

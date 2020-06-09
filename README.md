@@ -47,6 +47,9 @@ https://lab.magiconch.com/nbnhhsh/
 
 [PopClip 插件](https://github.com/qazhuhuihao/nbnhhsh.popclipext) @hhh
 
+[Chrome 插件](https://github.com/moonrailgun/nbnhhsh-crx) @moonrailgun
+下载地址: [Chrome 应用商店](https://chrome.google.com/webstore/detail/okepehobneenpbhiendcjcanjodhmcbj)
+
 ## GreasyFork
 [https://greasyfork.org/zh-CN/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
 

@@ -207,6 +207,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 `, `
 .nbnhhsh-box{
 	font:400 14px/1.4 sans-serif;
+	color:#333;
 }
 .nbnhhsh-box-pop{
 	position: absolute;

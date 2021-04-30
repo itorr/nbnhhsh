@@ -27,6 +27,13 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		x.setRequestHeader('content-type', 'application/json');
 		x.withCredentials = true;
 		x.onload = ()=> onOver(x.responseText ? JSON.parse(x.responseText) : null);
+		x.timeout = 20000;
+		x.onerror = x.ontimeout = ()=>{
+			app.loading = false;
+			if(!app.show)
+				return;
+			app.error = true;
+		};
 		x.send(JSON.stringify(data));
 		return x;
 	};
@@ -45,9 +52,11 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 		app.loading = true;
 		guess._request = request('POST',API_URL+'guess',{text},data=>{
+			app.loading = false;
+			if(!app.show)
+				return;
 			Guess[text] = data;
 			onOver(data);
-			app.loading = false;
 		});
 	};
 
@@ -107,13 +116,11 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	};
 
 	const timer = ()=>{
-		if(getSelectionText()){
+		if(app.show && getSelectionText()){
 			setTimeout(timer,300);
 		}else{
-			app.tags=[];
-			app.show = false;
-			app.welcome = false;
-			app.loading = false;
+			app.show = app.welcome = app.loading = app.error = false;
+			app.tags = [];
 		}
 	};
 
@@ -149,7 +156,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 	const _nbnhhsh = ()=>{
 		setTimeout(()=>{
-			if(app.loading||app.welcome||app.show||!app.tags){
+			if(app.show){
 				return;
 			}
 			nbnhhsh();
@@ -179,6 +186,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 			show:false,
 			welcome:false,
 			loading:false,
+			error:false,
 			top:0,
 			left:0,
 		},
@@ -203,6 +211,10 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	</div>
 	<div class="nbnhhsh-loading" v-else-if="loading">
 		加载中…
+	</div>
+	<div class="nbnhhsh-error" v-else-if="error">
+		API 请求超时或失败，请稍后重新重试
+		<a @click.prevent="go()" class="nbnhhsh-btn nbnhhsh-retry-btn"></a>
 	</div>
 	<div class="nbnhhsh-tag-list" v-else-if="tags.length">
 		<div class="nbnhhsh-tag-item" v-for="tag in tags">
@@ -323,7 +335,6 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-btn{
 	position: absolute;
 	top:0;
-	width: 30px;
 	line-height: 30px;
 	text-align: center;
 	color: #0059ff;
@@ -334,7 +345,10 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	right:0;
 	font-weight: bold;
 }
-.nbnhhsh-go-btn{
+.nbnhhsh-add-btn,.nbnhhsh-go-btn{
+	width: 30px;
+}
+.nbnhhsh-go-btn,.nbnhhsh-retry-btn{
 	left:0;
 }
 .nbnhhsh-add-btn:after{
@@ -343,7 +357,10 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-go-btn:after{
 	content: '<-';
 }
-.nbnhhsh-loading,.nbnhhsh-welcome{
+.nbnhhsh-retry-btn:after{
+	content: '重试';
+}
+.nbnhhsh-loading,.nbnhhsh-welcome,.nbnhhsh-error{
 	text-align: center;
 	color:#999;
 	padding:20px 0;

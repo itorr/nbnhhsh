@@ -4,6 +4,7 @@
 // @version      0.14
 // @description  首字母缩写划词翻译工具
 // @author       itorr
+// @icon         https://lab.magiconch.com/favicon.ico
 // @match        *://weibo.com/*
 // @match        *://*.weibo.com/*
 // @match        *://*.weibo.cn/*
@@ -26,6 +27,13 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		x.setRequestHeader('content-type', 'application/json');
 		x.withCredentials = true;
 		x.onload = ()=> onOver(x.responseText ? JSON.parse(x.responseText) : null);
+		x.timeout = 20000;
+		x.onerror = x.ontimeout = ()=>{
+			app.loading = false;
+			if(!app.show)
+				return;
+			app.error = true;
+		};
 		x.send(JSON.stringify(data));
 		return x;
 	};
@@ -44,9 +52,11 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 		app.loading = true;
 		guess._request = request('POST',API_URL+'guess',{text},data=>{
+			app.loading = false;
+			if(!app.show)
+				return;
 			Guess[text] = data;
 			onOver(data);
-			app.loading = false;
 		});
 	};
 
@@ -106,10 +116,11 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	};
 
 	const timer = ()=>{
-		if(getSelectionText()){
+		if(app.show && getSelectionText()){
 			setTimeout(timer,300);
 		}else{
-			app.show = false;
+			app.show = app.welcome = app.loading = app.error = false;
+			app.tags = [];
 		}
 	};
 
@@ -124,6 +135,16 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 		fixPosition();
 
+		app.welcome = true;
+
+		setTimeout(timer,300);
+	};
+
+	const go = ()=>{
+		app.welcome = false;
+
+		let text = getSelectionText();
+
 		guess(text,data=>{
 			if(!data.length){
 				app.show = false;
@@ -131,12 +152,15 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 				app.tags = data;
 			}
 		});
-
-		setTimeout(timer,300);
 	};
 
 	const _nbnhhsh = ()=>{
-		setTimeout(nbnhhsh,1);
+		setTimeout(()=>{
+			if(app.show){
+				return;
+			}
+			nbnhhsh();
+		},1);
 	};
 
 	document.body.addEventListener('mouseup',_nbnhhsh);
@@ -160,11 +184,14 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		data: {
 			tags:[],
 			show:false,
+			welcome:false,
 			loading:false,
+			error:false,
 			top:0,
 			left:0,
 		},
 		methods:{
+			go,
 			submitTran,
 			transArrange,
 		}
@@ -177,8 +204,17 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	}
 })(`
 <div class="nbnhhsh-box nbnhhsh-box-pop" v-if="show" :style="{top:top+'px',left:left+'px'}" @mousedown.prevent>
-	<div class="nbnhhsh-loading" v-if="loading">
+	<div class="nbnhhsh-welcome" v-if="welcome">
+		<h1>能不能好好说话？</h1>
+		<h5>拼音首字母缩写释义工具</h5>
+		<a @click.prevent="go()" class="nbnhhsh-btn nbnhhsh-go-btn" title="查询所选内容释义"></a>
+	</div>
+	<div class="nbnhhsh-loading" v-else-if="loading">
 		加载中…
+	</div>
+	<div class="nbnhhsh-error" v-else-if="error">
+		API 请求超时或失败，请稍后重新重试
+		<a @click.prevent="go()" class="nbnhhsh-btn nbnhhsh-retry-btn"></a>
 	</div>
 	<div class="nbnhhsh-tag-list" v-else-if="tags.length">
 		<div class="nbnhhsh-tag-item" v-for="tag in tags">
@@ -200,7 +236,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 			<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
 				尚未录入，我来提交对应文字
 			</div>
-			<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+			<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-btn nbnhhsh-add-btn" title="我来提交对应文字"></a>
 		</div>
 	</div>
 </div>
@@ -253,7 +289,14 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 .nbnhhsh-tag-item:nth-child(even){
 	background: rgba(0, 99, 255, 0.06);
 }
-.nbnhhsh-tag-item h4{
+.nbnhhsh-box h1{
+	color:#444;
+	font-weight:bold;
+	font-size:2em;
+	line-height:32px;
+	margin:0;
+}
+.nbnhhsh-box h4{
 	font-weight:bold;
 	font-size:20px;
 	line-height:28px;
@@ -274,7 +317,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	color:#222;
 	padding:4px 0;
 }
-.nbnhhsh-inputting-list h5{
+.nbnhhsh-box h5{
 	font-size:12px;
 	line-height:24px;
 	color:#999;
@@ -289,22 +332,35 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	color:#999;
 	cursor: pointer;
 }
-.nbnhhsh-add-btn{
+.nbnhhsh-btn{
 	position: absolute;
 	top:0;
-	right:0;
-	width: 30px;
 	line-height: 30px;
 	text-align: center;
 	color: #0059ff;
 	font-size: 16px;
-	font-weight: bold;
 	cursor: pointer;
+}
+.nbnhhsh-add-btn{
+	right:0;
+	font-weight: bold;
+}
+.nbnhhsh-add-btn,.nbnhhsh-go-btn{
+	width: 30px;
+}
+.nbnhhsh-go-btn,.nbnhhsh-retry-btn{
+	left:0;
 }
 .nbnhhsh-add-btn:after{
 	content: '+';
 }
-.nbnhhsh-loading{
+.nbnhhsh-go-btn:after{
+	content: '<-';
+}
+.nbnhhsh-retry-btn:after{
+	content: '重试';
+}
+.nbnhhsh-loading,.nbnhhsh-welcome,.nbnhhsh-error{
 	text-align: center;
 	color:#999;
 	padding:20px 0;

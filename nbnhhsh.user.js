@@ -4,6 +4,7 @@
 // @version      0.14
 // @description  首字母缩写划词翻译工具
 // @author       itorr
+// @icon         https://lab.magiconch.com/favicon.ico
 // @match        *://weibo.com/*
 // @match        *://*.weibo.com/*
 // @match        *://*.weibo.cn/*

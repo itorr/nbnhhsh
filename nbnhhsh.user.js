@@ -4,14 +4,11 @@
 // @version      0.14
 // @description  首字母缩写划词翻译工具
 // @author       itorr
-// @match        *://weibo.com/*
 // @match        *://*.weibo.com/*
 // @match        *://*.weibo.cn/*
 // @match        *://tieba.baidu.com/*
-// @match        *://*.bilibili.com/
 // @match        *://*.bilibili.com/*
 // @match        *://*.douban.com/group/*
-// @match        *://douban.com/group/*
 // @require      https://cdn.bootcss.com/vue/2.6.11/vue.min.js
 // @grant        none
 // ==/UserScript==

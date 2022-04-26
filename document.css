@@ -64,7 +64,12 @@ textarea{
 	color:#666;
 	background:rgba(0,0,0,.05);
 }
-
+.from{
+	text-align: right;
+	font-size: 12px;
+	opacity: 0.5;
+    padding: 0 0 0.4em;
+}
 pre{
 	background:#222;
 	color:#FFF;

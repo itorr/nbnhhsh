@@ -55,7 +55,7 @@
 				夸人骂人也都缩写，yjjc一骑绝尘，wdcc弯道超车，yygq阴阳怪气，myss美颜盛世，rnb我也猜了半天，最后被告知是really牛b的意思，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈又硬了呢。<br>
 				最要命的还不是这些，我刚刚看到网友评价什么什么他jb的什么，我以为jb就是jb的意思吧，但联系上下文句子又读不通，想了一分钟，哇，原来jb是姜滨的缩写啊！<br>
 				jb＝姜滨，我离开了。</p>
-			<p>@你里哥哥</p>
+			<p class="from">博文引用来源 @你里哥哥（非开发者）</p>
 		</blockquote>
 
 		<h2>为什么做这东西？</h2>
@@ -82,11 +82,6 @@
 		<pre>&lt;script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://lab.magiconch.com/nbnhhsh/nbnhhsh.user.js"&gt;&lt;/script&gt;</pre>
 
-		<h2>有更离谱的例文？</h2>
-		<p>请用任意方式发我！😖 比如 <a href="https://weibo.com/reiove" target="_blank">@卜卜口</a></p>
-
-		<h2>为什么被腾讯QQ以及微信提示包含不安全内容、被多人举报，以停止访问该网页？</h2>
-		<p>我也不清楚，也没地方问☹️</p>
 		<h2>打赏</h2>
 		<p>
 			<img src="sponsor.png" alt="支付宝打赏">
@@ -100,7 +95,7 @@
 
 	</div>
 
-	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="vue.2.6.11.min.js"></script>
 	<script src="nbnhhsh.user.js"></script>
 	<script>
 		let guessTimer;
@@ -156,12 +151,26 @@
 
 		const loadScript = (src,el) =>{
 			el = document.createElement('script');
+			el.onload = _=>{
+				document.body.removeChild(el);
+			};
 			el.src = src;
 			document.body.appendChild(el);
+			return el;
 		};
 
-		setTimeout(()=>{
-			loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
+
+		let _hmt = [];
+		let dataLayer = [
+			['js', new Date()],
+			['config', 'G-13BQC1VDD8']
+		];
+		window.gtag = function() {
+			dataLayer.push(arguments);
+		};
+		setTimeout(_ => {
+			loadScript('//hm.baidu.com/hm.js?f4e477c61adf5c145ce938a05611d5f0');
+			loadScript('//www.googletagmanager.com/gtag/js?id=G-13BQC1VDD8');
 		},400);
 	</script>
 </body>

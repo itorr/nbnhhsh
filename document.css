@@ -1,32 +1,56 @@
+h1,h2,h4,h5,p{
+	margin:0
+}
 html{
-	background: #efefef;
+	background:#efefef;
+	color:#222;
+	font:14px "SF Pro SC","SF Pro Text","SF Pro Icons","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+}
+button,textarea{
+	font:inherit
+}
+h2,h4{
+	font-weight:600
+}
+button:focus,textarea:focus{
+	outline:0
+}
+::selection{
+	background:rgba(0,149,255,.1)
+}
+a{
+	text-decoration:none;
+	color:#004cff
+}
+img{
+	border:0
 }
 body{
-	max-width: 800px;
-	margin:0 auto;
+	max-width:800px;
+	margin:0 auto
 }
 head{
-	display: block;
-	text-align: center;
-	padding:60px 0;
-
+	display:block;
+	text-align:center;
+	padding:60px 0
 }
 title{
-	display: block;
+	display:block;
 	font-weight:bold;
-	font-size:2.5em;
-
+	font-size:2.5em
 }
 meta[name="discription"]{
-	display: block;
+	display:block;
 	padding:.5em 0;
-	color:#999;
+	color:#999
 }
 meta[name="discription"]:after{
-	content: attr(content);
+	content:attr(content)
 }
 textarea{
-	display: block;
+	display:block;
 	border:0;
 	width:calc( 100% - 28px );
 	max-width:calc( 100% - 28px );
@@ -34,46 +58,46 @@ textarea{
 	min-height:200px;
 	padding:10px 14px;
 	box-shadow:0 0 0 2px #999 inset;
-
+	resize:none
 }
 .nbnhhsh-box-doc{
-	padding:20px 0;
+	padding:20px 0
 }
 .nbnhhsh-box-doc .nbnhhsh-tag-item:nth-child(even){
-	background:rgba(255,255,255,.5);
+	background:rgba(255,255,255,.5)
 }
 .content-box{
-	padding:20px 10px 400px;
+	padding:20px 10px 400px
 }
 .content-box h2{
-	padding:1.5em 0 .5em;
+	padding:1.5em 0 .5em
 }
 .content-box p{
-	padding:.4em 0;
+	padding:.4em 0
 }
 .content-box code{
-	display: inline-block;
+	display:inline-block;
 	margin:0 0.3em;
 	background:rgba(0,0,0,.1);
 	padding:.1em .3em;
-	border-radius:.2em;
+	border-radius:.2em
 }
 .content-box blockquote{
 	margin:1em 0;
-	padding: .6em 1.2em;
+	padding:.6em 1.2em;
 	color:#666;
-	background:rgba(0,0,0,.05);
+	background:rgba(0,0,0,.05)
 }
 .from{
-	text-align: right;
-	font-size: 12px;
-	opacity: 0.5;
-    padding: 0 0 0.4em;
+	text-align:right;
+	font-size:12px;
+	opacity:0.5;
+    padding:0 0 0.4em
 }
 pre{
 	background:#222;
 	color:#FFF;
 	padding:4px 8px;
-	line-height: 1.2;
-	overflow: auto;
+	line-height:1.2;
+	overflow:auto
 }

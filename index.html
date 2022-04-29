@@ -3,16 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>能不能好好说话？</title>
-	<link rel="stylesheet" href="base.css">
 	<link rel="stylesheet" href="document.css">
 	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<meta name="discription" content="拼音首字母缩写释义工具">
 </head>
 <body>
 	<div id="el">
-		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
-
-		<div class="nbnhhsh-box nbnhhsh-box-doc" v-if="show">
+		<textarea v-model.trim="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
+		<div class="nbnhhsh-box nbnhhsh-box-doc">
 			<div class="nbnhhsh-loading" v-if="loading">
 				加载中…
 			</div>
@@ -39,10 +37,9 @@
 					<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
 				</div>
 			</div>
-			<div class="nbnhhsh-loading" v-else>
+			<div class="nbnhhsh-loading" v-else-if="text">
 				没有匹配到拼音首字母缩写
 			</div>
-
 		</div>
 	</div>
 	<div class="content-box">
@@ -95,7 +92,7 @@
 
 	</div>
 
-	<script src="vue.2.6.11.min.js"></script>
+	<script src="/vue.2.6.11.min.js"></script>
 	<script src="nbnhhsh.user.js"></script>
 	<script>
 		let guessTimer;
@@ -104,24 +101,26 @@
 			data: {
 				text:'',
 				tags:[],
-				show:false,
+				waiting:false,
 				loading:false,
 			},
 			methods: {
 				...Nbnhhsh,
 				nbnhhsh(){
-					let text = this.text;
-
-					app.show = !!text && /[a-z0-9]/i.test(text);
+					// app.tags = [];
+					// app.waiting = true;
 
 					clearTimeout(guessTimer);
+					guessTimer = setTimeout(_=>{
+						let text = this.text;
 
-					if(!app.show){
-						return;
-					}
+						// app.waiting = false;
 
-					guessTimer = setTimeout(()=>{
+						if(!text || !/[a-z0-9]{2,}/i.test(text)) return app.tags = [];
+
+						app.loading = true;
 						this.guess(text,data=>{
+							app.loading = false;
 							if(!data.length){
 								app.show = false;
 							}else{

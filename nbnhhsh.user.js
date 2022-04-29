@@ -33,7 +33,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 	const Guess = {};
 	const guess = (text,onOver)=>{
-		text = text.match(/[a-z0-9]+/ig).join(',');
+		text = text.match(/[a-z0-9]{2,}/ig).join(',');
 
 		if(Guess[text]){
 			return onOver(Guess[text]);
@@ -80,7 +80,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		})
 	};
 
-	const getSelectionText = ()=>{
+	const getSelectionText = _=>{
 		let text = getSelection().toString().trim();
 
 		if(!!text && /[a-z0-9]/i.test(text)){
@@ -90,8 +90,11 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		}
 	};
 
-	const fixPosition = ()=>{
+	const fixPosition = _=>{
 		let rect = getSelection().getRangeAt(0).getBoundingClientRect();
+
+		const activeEl = document.activeElement;
+		if(['TEXTAREA','INPUT'].includes(activeEl.tagName)) rect = activeEl.getBoundingClientRect();
 
 		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
@@ -106,7 +109,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 
 	};
 
-	const timer = ()=>{
+	const timer = _=>{
 		if(getSelectionText()){
 			setTimeout(timer,300);
 		}else{
@@ -114,7 +117,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		}
 	};
 
-	const nbnhhsh = ()=>{
+	const nbnhhsh = _=>{
 		let text = getSelectionText();
 
 		app.show = !!text && /[a-z0-9]/i.test(text);
@@ -136,14 +139,14 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 		setTimeout(timer,300);
 	};
 
-	const _nbnhhsh = ()=>{
+	const _nbnhhsh = _=>{
 		setTimeout(nbnhhsh,1);
 	};
 
 	document.body.addEventListener('mouseup',_nbnhhsh);
 	document.body.addEventListener('keyup',_nbnhhsh);
 
-	const createEl = (html)=>{
+	const createEl = html=>{
 		createEl._el.innerHTML = html;
 		let el = createEl._el.children[0];
 		document.body.appendChild(el);

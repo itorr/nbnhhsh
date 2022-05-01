@@ -234,18 +234,18 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	border-bottom-color:#FFF;
 }
 .nbnhhsh-box sub{
-    vertical-align: middle;
-    
-    background: rgba(0,0,0,.07);
-    color: #777;
-    font-size: 12px;
-    line-height:16px;
-    display: inline-block;
-    padding: 0 3px;
-    margin:-2px 0 0 2px;
-    border-radius: 2px;
-    letter-spacing: -0.6px;
-    bottom:0;
+	vertical-align: middle;
+	
+	background: rgba(0,0,0,.07);
+	color: #777;
+	font-size: 12px;
+	line-height:16px;
+	display: inline-block;
+	padding: 0 3px;
+	margin:-2px 0 0 2px;
+	border-radius: 2px;
+	letter-spacing: -0.6px;
+	bottom:0;
 }
 .nbnhhsh-tag-list{
 	/*padding:4px 0;*/
@@ -261,7 +261,7 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	font-weight:bold;
 	font-size:20px;
 	line-height:28px;
-    letter-spacing: 1.5px;
+	letter-spacing: 1.5px;
 	margin:0;
 }
 .nbnhhsh-tran-list{
@@ -270,8 +270,8 @@ let Nbnhhsh = ((htmlText,cssText)=>{
 	line-height:18px;
 }
 .nbnhhsh-tran-item{
-    display: inline-block;
-    padding: 2px 15px 2px 0;
+	display: inline-block;
+	padding: 2px 15px 2px 0;
 }
 
 .nbnhhsh-inputting-list{

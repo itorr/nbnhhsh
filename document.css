@@ -5,8 +5,8 @@ html{
 	background:#efefef;
 	color:#222;
 	font:14px "SF Pro SC","SF Pro Text","SF Pro Icons","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-rendering:optimizeLegibility;
-    -webkit-font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+	-webkit-font-smoothing:antialiased;
 }
 button,textarea{
 	font:inherit
@@ -92,7 +92,7 @@ textarea{
 	text-align:right;
 	font-size:12px;
 	opacity:0.5;
-    padding:0 0 0.4em
+	padding:0 0 0.4em
 }
 pre{
 	background:#222;

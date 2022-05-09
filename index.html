@@ -137,29 +137,27 @@
 		app.nbnhhsh();
 
 
-		const loadScript = (src,el) =>{
+		const loadScript = (src,onLoad=_=>{},el) =>{
 			el = document.createElement('script');
-			el.onload = _=>{
-				document.body.removeChild(el);
-			};
 			el.src = src;
+			el.onload = onLoad;
 			document.body.appendChild(el);
-			return el;
 		};
 
-
-		let _hmt = [];
-		let dataLayer = [
+		window._hmt = [];
+		const gtmId = 'G-13BQC1VDD8';
+		window.dataLayer = [
 			['js', new Date()],
-			['config', 'G-13BQC1VDD8']
+			['config', gtmId]
 		];
-		window.gtag = function() {
-			dataLayer.push(arguments);
-		};
-		setTimeout(_ => {
-			loadScript('//hm.baidu.com/hm.js?f4e477c61adf5c145ce938a05611d5f0');
-			loadScript('//www.googletagmanager.com/gtag/js?id=G-13BQC1VDD8');
-		},400);
+		window.gtag = function(){dataLayer.push(arguments)};
+		setTimeout(_=>{
+			loadScript('https://hm.baidu.com/hm.js?f4e477c61adf5c145ce938a05611d5f0');
+			loadScript('https://www.googletagmanager.com/gtag/js?id='+gtmId);
+			loadScript('https://sdk.51.la/js-sdk-pro.min.js',_=>{
+				LA.init({id: "JgPCvOAtY0gH7fbQ",ck: "JgPCvOAtY0gH7fbQ",autoTrack:true,hashMode:true})
+			})
+		},1400);
 	</script>
 </body>
 </html>

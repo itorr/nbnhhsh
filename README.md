@@ -15,7 +15,7 @@ https://lab.magiconch.com/nbnhhsh/
 ## 用户脚本是什么？
 用户脚本是一段代码，它们能够优化您的网页浏览体验。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。
 
-安装过程可参考 [https://greasyfork.org/zh-CN/](https://greasyfork.org/zh-CN/#home-step-1) 首页的，**第一步：安装一个用户脚本管理器** 章节
+安装过程可参考 [https://greasyfork.org/](https://greasyfork.org/zh-CN/#home-step-1) 首页的，**第一步：安装一个用户脚本管理器** 章节
 
 
 ## 如何在更多网站上使用这个用户脚本？
@@ -50,7 +50,7 @@ https://lab.magiconch.com/nbnhhsh/
 [PowerShell 脚本](https://github.com/KiyanYang/nbnhhsh-powershell) @KiyanYang
 
 ## GreasyFork
-[https://greasyfork.org/zh-CN/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
+[https://greasyfork.org/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
 
 
 ## 打赏

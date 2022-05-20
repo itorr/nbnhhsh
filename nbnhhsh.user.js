@@ -13,7 +13,7 @@
 // @match        *://*.bilibili.com/
 // @match        *://*.bilibili.com/*
 // @match        *://*.douban.com/group/*
-// @require      https://lab.magiconch.com/vue.min.2.6.11.js
+// @require      https://lab.magiconch.com/vue.2.6.11.min.js
 // @grant        none
 // ==/UserScript==
 

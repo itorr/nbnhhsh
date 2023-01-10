@@ -14,6 +14,7 @@
 // @match        *://*.bilibili.com/*
 // @match        *://*.douban.com/group/*
 // @require      https://lab.magiconch.com/vue.2.6.11.min.js
+// @inject-into  content
 // @grant        none
 // ==/UserScript==
 

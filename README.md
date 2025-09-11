@@ -24,6 +24,9 @@ https://lab.magiconch.com/nbnhhsh/
 ## 贡献词条
 在每一个词条右上角都有 `+` 图标的按钮，点击可以提交对应文字，审核后会整理录入。
 
+## 错误词条反馈
+通过 issue 反馈 [#122](https://github.com/itorr/nbnhhsh/issues/122)
+
 ## 有更离谱的例文？
 请用任意方式发我！😖
 

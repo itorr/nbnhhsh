@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="el">
-		<textarea v-model.trim="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
+		<textarea id="editor" v-model.trim="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
 		<div class="nbnhhsh-box nbnhhsh-box-doc">
 			<div class="nbnhhsh-loading" v-if="loading">
 				加载中…
@@ -163,6 +163,8 @@
 			loadScript('https://hm.baidu.com/hm.js?f4e477c61adf5c145ce938a05611d5f0');
 			loadScript('https://www.googletagmanager.com/gtag/js?id='+gtmId);
 		},1400);
+
+		document.getElementById("editor").focus();
 	</script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4293992693235467"

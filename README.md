@@ -59,5 +59,10 @@ https://lab.magiconch.com/nbnhhsh/
 ## 打赏
 ![支付宝打赏](sponsor.png)
 
+
+## 声明
+ - 本项目 CDN 加速及安全防护由 [<img width="140" height="20" style="vertical-align: middle;" alt="Tencent EdgeOne" src="https://github.com/user-attachments/assets/c96a0e8e-bf25-47e7-ad78-36a67525aded" />](https://edgeone.ai/zh?from=github) 赞助
+
+
 ## 仓库地址
 [https://github.com/itorr/nbnhhsh](https://github.com/itorr/nbnhhsh)

@@ -54,6 +54,8 @@ https://lab.magiconch.com/nbnhhsh/
 
 [Flow Launcher 插件](https://github.com/dragonish/Flow.Launcher.Plugin.Nbnhhsh) @dragonish
 
+[MCP 服务器](https://github.com/lxdlam/nbnhhsh-mcp) @lxdlam
+
 ## GreasyFork
 [https://greasyfork.org/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
 

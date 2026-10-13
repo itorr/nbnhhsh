@@ -60,6 +60,7 @@ https://lab.magiconch.com/nbnhhsh/
 ## GreasyFork
 [https://greasyfork.org/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
 
+[Wox 插件](https://github.com/dragonish/Wox.Plugin.Nbnhhsh) @dragonish
 
 ## 打赏
 ![支付宝打赏](sponsor.png)

@@ -101,6 +101,9 @@
 				waiting:false,
 				loading:false,
 			},
+			mounted(){
+				this.$el.querySelector('textarea').focus();
+			},
 			methods: {
 				...Nbnhhsh,
 				nbnhhsh(){

@@ -54,11 +54,15 @@ https://lab.magiconch.com/nbnhhsh/
 
 [Flow Launcher 插件](https://github.com/dragonish/Flow.Launcher.Plugin.Nbnhhsh) @dragonish
 
+[NoneBot2 插件](https://github.com/ByteColtX/nonebot-plugin-nbnhhsh) @ByteColtX
+在 QQ 等聊天平台直接查询缩写、并支持自动划词翻译的 NoneBot2 插件。
+
+[Wox 插件](https://github.com/dragonish/Wox.Plugin.Nbnhhsh) @dragonish
+
 [MCP 服务器](https://github.com/lxdlam/nbnhhsh-mcp) @lxdlam
 
 ## GreasyFork
 [https://greasyfork.org/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
-
 
 ## 打赏
 ![支付宝打赏](sponsor.png)

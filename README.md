@@ -59,6 +59,8 @@ https://lab.magiconch.com/nbnhhsh/
 
 [Wox 插件](https://github.com/dragonish/Wox.Plugin.Nbnhhsh) @dragonish
 
+[MCP 服务器](https://github.com/lxdlam/nbnhhsh-mcp) @lxdlam
+
 ## GreasyFork
 [https://greasyfork.org/scripts/398555](https://greasyfork.org/zh-CN/scripts/398555)
 

@@ -5,6 +5,7 @@
 ## 网页版本
 https://lab.magiconch.com/nbnhhsh/
 
+
 ## 油猴版本
 ### 安装脚本
 安装好用户脚本浏览器插件之后，访问 [nbnhhsh.user.js](https://github.com/itorr/nbnhhsh/raw/master/nbnhhsh.user.js) 完成脚本安装
@@ -23,6 +24,9 @@ https://lab.magiconch.com/nbnhhsh/
 
 ## 贡献词条
 在每一个词条右上角都有 `+` 图标的按钮，点击可以提交对应文字，审核后会整理录入。
+
+## 错误词条反馈
+通过 issue 反馈 [#122](https://github.com/itorr/nbnhhsh/issues/122)
 
 ### 有更离谱的例文？
 请用任意方式发我！😖
@@ -49,6 +53,15 @@ https://lab.magiconch.com/nbnhhsh/
 
 [PowerShell 脚本](https://github.com/KiyanYang/nbnhhsh-powershell) @KiyanYang
 
+[Flow Launcher 插件](https://github.com/dragonish/Flow.Launcher.Plugin.Nbnhhsh) @dragonish
+
+[NoneBot2 插件](https://github.com/ByteColtX/nonebot-plugin-nbnhhsh) @ByteColtX
+在 QQ 等聊天平台直接查询缩写、并支持自动划词翻译的 NoneBot2 插件。
+
+[Wox 插件](https://github.com/dragonish/Wox.Plugin.Nbnhhsh) @dragonish
+
+[MCP 服务器](https://github.com/lxdlam/nbnhhsh-mcp) @lxdlam
+
 ## GreasyFork
 [398555-能不能好好说话](https://greasyfork.org/zh-CN/scripts/398555)
 
@@ -57,3 +70,7 @@ https://lab.magiconch.com/nbnhhsh/
 
 ## 打赏
 ![支付宝打赏](sponsor.png)
+
+
+## 声明
+ - 本项目 CDN 加速及安全防护由 [<img width="140" height="20" style="vertical-align: middle;" alt="Tencent EdgeOne" src="https://github.com/user-attachments/assets/c96a0e8e-bf25-47e7-ad78-36a67525aded" />](https://edgeone.ai/zh?from=github) 赞助
